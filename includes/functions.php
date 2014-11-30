@@ -151,7 +151,7 @@ function issuu_painel_tinymce_ajax()
 	<!DOCTYPE html>
 	<html>
 	<head>
-		<title>Issuu Painel Shortcode</title>
+		<title>Issuu Panel Shortcode</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="<?= ISSUU_PAINEL_URL; ?>css/issuu-painel-tinymce-popup.css">
 		<?php

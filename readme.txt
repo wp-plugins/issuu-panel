@@ -26,6 +26,15 @@ Issuu Panel is distributed in the hope that it will be useful, but WITHOUT ANY W
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with Issuu Panel. If not, see <http://www.gnu.org/licenses/>.
 
+== Screenshots ==
+
+1. This is the first menu available. Insert your API key here.
+2. Other menus will be released after the registration of the keys.
+3. In this menu you can upload, list, update and delete documents of your Issuu account.
+4. In this menu you can create, list, update, and delete folders to insert documents in them.
+5. This is the button to insert a shortcode in post content.
+6. This is the screen to insert a shortcode in post content.
+
 == Frequently Asked Questions ==
 
 = How can I help with the translation of the plugin? =

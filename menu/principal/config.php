@@ -7,8 +7,8 @@ function issuu_painel_menu_admin()
 	global $issuu_painel_capacity;
 
 	add_menu_page(
-		'Issuu Painel',
-		'Issuu Painel',
+		'Issuu Panel',
+		'Issuu Panel',
 		$issuu_painel_capacity,
 		'issuu-painel-admin',
 		'issuu_painel_menu_admin_init',
@@ -36,7 +36,7 @@ function issuu_painel_menu_admin_init()
 			get_issuu_message("To create keys $link_api_service") . "</p></div>";
 	}
 
-	echo '<h1>Issuu Painel Admin</h1>';
+	echo '<h1>Issuu Panel Admin</h1>';
 
 	echo "<form action=\"\" method=\"post\" accept-charset=\"utf-8\">";
 	echo '<p><label for="api_key"><strong>' . get_issuu_message('API key') . '</strong></label><br>';

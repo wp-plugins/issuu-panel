@@ -1,9 +1,9 @@
 (function(){
-	tinymce.create('tinymce.plugins.IssuuPainel', {
+	tinymce.create('tinymce.plugins.IssuuPanel', {
 		init : function(ed, url) {
 			var popupIssuu = url + '/tinymce/ola-mundo.php';
 
-			ed.addCommand('IssuuPainelCommand', function(){
+			ed.addCommand('IssuuPanelCommand', function(){
 				ed.windowManager.open({
 					file: ajaxurl + '?action=issuu_painel_tinymce_ajax',
 					width: 420,
@@ -12,15 +12,15 @@
 				});
 			});
 
-			ed.addButton('issuupainel', {
-				title : 'Issuu Painel Shortcode',
+			ed.addButton('issuupanel', {
+				title : 'Issuu Panel Shortcode',
 				image : url + '/../images/issuu-painel-tinymce-button.png',
-				cmd: 'IssuuPainelCommand'
+				cmd: 'IssuuPanelCommand'
 			});
 		},
 		getInfo : function(){
 			return {
-				longname : "Issuu Painel",
+				longname : "Issuu Panel",
 				author : 'Pedro Marcelo',
 				authorurl : 'https://github.com/pedromarcelojava/',
 				infourl : 'https://github.com/pedromarcelojava/Issuu-Painel/',
@@ -28,5 +28,5 @@
 			};
 		}
 	});
-	tinymce.PluginManager.add('issuupainel', tinymce.plugins.IssuuPainel);
+	tinymce.PluginManager.add('issuupanel', tinymce.plugins.IssuuPanel);
 })();
