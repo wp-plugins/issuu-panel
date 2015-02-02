@@ -1,6 +1,6 @@
 <?php
 
-function issuu_painel_quick_sort($array, $order = 'asc')
+function issuu_panel_quick_sort($array, $order = 'asc')
 {
 	$length = count($array);
 	
@@ -38,7 +38,7 @@ function issuu_painel_quick_sort($array, $order = 'asc')
 			}
 		}
 		
-		return array_merge(issuu_painel_quick_sort($left), array($pivot), issuu_painel_quick_sort($right));
+		return array_merge(issuu_panel_quick_sort($left, $order), array($pivot), issuu_panel_quick_sort($right, $order));
 	}
 }
 
@@ -52,7 +52,7 @@ function the_issuu_message($text)
 	_e($text, ISSUU_PAINEL_DOMAIN_LANG);
 }
 
-function issuu_painel_link_page($page, $permalink, $page_name)
+function issuu_panel_link_page($page, $permalink, $page_name)
 {
 	$QUERY_STRING = $_SERVER['QUERY_STRING'];
 
@@ -107,40 +107,40 @@ function issuu_painel_link_page($page, $permalink, $page_name)
 	return $link;
 }
 
-function add_youtube_button()
+function add_issuu_panel_button()
 {
 	if (!current_user_can('edit_posts') && !current_user_can('edit_pages'))
 		return;
 	if (get_user_option('rich_editing') == 'true')
 	{
-		add_filter('mce_external_plugins', 'add_issuu_painel_tinymce_plugin');
-		add_filter('mce_buttons', 'register_issuu_painel_button');
+		add_filter('mce_external_plugins', 'add_issuu_panel_tinymce_plugin');
+		add_filter('mce_buttons', 'register_issuu_panel_button');
 	}
 }
 
-add_action('init', 'add_youtube_button');
+add_action('init', 'add_issuu_panel_button');
 
-function register_issuu_painel_button($buttons)
+function register_issuu_panel_button($buttons)
 {
-	array_push($buttons, "|", "issuupainel");
+	array_push($buttons, "|", "issuupanel");
 	return $buttons;
 }
 
-function add_issuu_painel_tinymce_plugin($plugin_array)
+function add_issuu_panel_tinymce_plugin($plugin_array)
 {
-	$plugin_array['issuupainel'] = ISSUU_PAINEL_URL . 'js/tinymce-button.js';
+	$plugin_array['issuupanel'] = ISSUU_PAINEL_URL . 'js/tinymce-button.js';
 	return $plugin_array;
 }
 
-function issuu_painel_refresh_mce($ver)
+function issuu_panel_refresh_mce($ver)
 {
 	$ver += 3;
 	return $ver;
 }
 
-add_filter('tiny_mce_version', 'issuu_painel_refresh_mce');
+add_filter('tiny_mce_version', 'issuu_panel_refresh_mce');
 
-function issuu_painel_tinymce_ajax()
+function issuu_panel_tinymce_ajax()
 {
 	global $api_key, $api_secret;
 
@@ -263,4 +263,4 @@ function issuu_painel_tinymce_ajax()
 	die();
 }
 
-add_action('wp_ajax_issuu_painel_tinymce_ajax', 'issuu_painel_tinymce_ajax');
+add_action('wp_ajax_issuu_panel_tinymce_ajax', 'issuu_panel_tinymce_ajax');

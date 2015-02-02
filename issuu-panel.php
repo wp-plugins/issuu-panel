@@ -3,7 +3,7 @@
 Plugin Name: Issuu Panel
 Plugin URI: https://github.com/pedromarcelojava/Issuu-Painel
 Description: Admin panel for Issuu. You can upload your documents, create folders and embed documents in posts.
-Version: 1.0
+Version: 1.1.1
 Author: Pedro Marcelo
 Author URI: https://www.linkedin.com/profile/view?id=265534858
 License: GPL3
@@ -51,6 +51,8 @@ include(ISSUU_PAINEL_DIR . 'menu/pasta/config.php');
 include(ISSUU_PAINEL_DIR . 'menu/sobre/config.php');
 include(ISSUU_PAINEL_DIR . 'shortcode/document-list.php');
 include(ISSUU_PAINEL_DIR . 'shortcode/folder-list.php');
+include(ISSUU_PAINEL_DIR . 'shortcode/the-last-document.php');
+include(ISSUU_PAINEL_DIR . 'widget/class.issuupanelwidget.php');
 
 add_action('wp_enqueue_scripts', 'issuu_painel_wp_enqueue_scripts');
 

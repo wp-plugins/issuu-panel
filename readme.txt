@@ -2,8 +2,8 @@
 Contributors: pedromjava
 Tags: issuu, shortcode, embed, documents, folders, panel, admin
 Requires at least: 3.5
-Tested up to: 4.0.1
-Stable tag: 1.0
+Tested up to: 4.1
+Stable tag: 1.1.1
 
 Upload documents, create folders, embed documents in the posts by the WordPress admin panel.
 
@@ -43,5 +43,9 @@ You can send the translation by e-mail. Send for pedromarcelodesaalves@gmail.com
 
 == Changelog ==
 
+= 1.1.1 =
+* Fixed: TinyMCE button did not work in WordPress 4.1
+* Added: My Last Document widget
+
 = 1.0 =
-* Start of plugin
+* First release

@@ -58,7 +58,7 @@ function issuu_painel_embed_folder_shortcode($atts)
 						);
 					}
 
-					$docs = issuu_painel_quick_sort($docs, $atts['result_order']);
+					$docs = issuu_panel_quick_sort($docs, $atts['result_order']);
 
 					include(ISSUU_PAINEL_DIR . 'shortcode/generator.php');
 

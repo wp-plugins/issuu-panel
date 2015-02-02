@@ -6,7 +6,6 @@ function issuu_painel_embed_documents_shortcode($atts)
 
 	$issuu_shortcode_index++;
 	$page_query_name = 'ip_shortcode' . $issuu_shortcode_index . '_page';
-	print_r(get_user_option('wp_capabilities'));
 
 	$atts = shortcode_atts(
 		array(
