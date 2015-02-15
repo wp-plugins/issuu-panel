@@ -32,7 +32,7 @@
 	<?php if (isset($folders_documents['documentsId']) && !empty($folders_documents['documentsId'])) : ?>
 		<h3>Shortcode</h3>
 		<input type="text" class="code shortcode" disabled size="70"
-			value='[issuu-painel-folder-list id="<?= $fo->folderId; ?>"]'>
+			value='[issuu-panel-folder-list id="<?= $fo->folderId; ?>"]'>
 	<?php endif; ?>
 	<div id="document-list">
 		<?php if (isset($folders_documents['documentsId']) && !empty($folders_documents['documentsId'])) : ?>

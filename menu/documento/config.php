@@ -1,28 +1,28 @@
 <?php
 
-add_action(ISSUU_PAINEL_PREFIX . 'submenu_pages', 'issuu_painel_menu_document', 1);
+add_action(ISSUU_PAINEL_PREFIX . 'submenu_pages', 'issuu_panel_menu_document', 1);
 
-function issuu_painel_menu_document()
+function issuu_panel_menu_document()
 {
 	global $issuu_painel_capacity;
 	
 	add_submenu_page(
-		'issuu-painel-admin',
+		ISSUU_PAINEL_MENU,
 		get_issuu_message('Documents'),
 		get_issuu_message('Documents'),
 		$issuu_painel_capacity,
 		'issuu-document-admin',
-		'issuu_painel_menu_document_init'
+		'issuu_panel_menu_document_init'
 	);
 }
 
-function issuu_painel_menu_document_init()
+function issuu_panel_menu_document_init()
 {
-	global $api_key, $api_secret;
+	global $issuu_panel_api_key, $issuu_panel_api_secret;
 
 	echo '<div class="wrap">';
 
-	$issuu_document = new IssuuDocument($api_key, $api_secret);
+	$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
 
 	if (isset($_GET['upload']) && !isset($_POST['delete']))
 	{
@@ -36,7 +36,7 @@ function issuu_painel_menu_document_init()
 		}
 		else
 		{
-			$issuu_folder = new IssuuFolder($api_key, $api_secret);
+			$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
 			$folders = $issuu_folder->issuuList();
 			$cnt_f = (isset($folders['folder']))? count($folders['folder']) : 0;
 			include(ISSUU_PAINEL_DIR . 'menu/documento/forms/upload.php');
@@ -55,7 +55,7 @@ function issuu_painel_menu_document_init()
 		}
 		else
 		{
-			$issuu_folder = new IssuuFolder($api_key, $api_secret);
+			$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
 			$folders = $issuu_folder->issuuList();
 			$cnt_f = (isset($folders['folder']))? count($folders['folder']) : 0;
 			include(ISSUU_PAINEL_DIR . 'menu/documento/forms/url-upload.php');

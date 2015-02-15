@@ -2,7 +2,7 @@
 
 function issuu_painel_embed_documents_shortcode($atts)
 {
-	global $api_key, $api_secret, $issuu_shortcode_index;
+	global $issuu_panel_api_key, $issuu_panel_api_secret, $issuu_shortcode_index;
 
 	$issuu_shortcode_index++;
 	$page_query_name = 'ip_shortcode' . $issuu_shortcode_index . '_page';
@@ -26,7 +26,7 @@ function issuu_painel_embed_documents_shortcode($atts)
 		'documentSortBy' => $atts['order_by']
 	);
 
-	$issuu_document = new IssuuDocument($api_key, $api_secret);
+	$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
 	$documents = $issuu_document->issuuList($params);
 
 	if ($documents['stat'] == 'ok')

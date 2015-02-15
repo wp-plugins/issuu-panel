@@ -2,7 +2,7 @@
 
 function issuu_painel_embed_folder_shortcode($atts)
 {
-	global $api_key, $api_secret, $issuu_shortcode_index;
+	global $issuu_panel_api_key, $issuu_panel_api_secret, $issuu_shortcode_index;
 
 	$issuu_shortcode_index++;
 	$page_query_name = 'ip_shortcode' . $issuu_shortcode_index . '_page';
@@ -22,7 +22,7 @@ function issuu_painel_embed_folder_shortcode($atts)
 
 	if (is_string($atts['id']) && strlen(trim($atts['id'])) > 0)
 	{
-		$issuu_bookmark = new IssuuBookmark($api_key, $api_secret);
+		$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
 
 		if (trim($atts['order_by']) == 'publishDate')
 		{
@@ -39,7 +39,7 @@ function issuu_painel_embed_folder_shortcode($atts)
 				if (isset($bookmarks['bookmark']) && !empty($bookmarks['bookmark']))
 				{
 					$docs = array();
-					$issuu_document = new IssuuDocument($api_key, $api_secret);
+					$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
 
 					$pagination = array(
 						'pageSize' => $bookmarks['pageSize'],

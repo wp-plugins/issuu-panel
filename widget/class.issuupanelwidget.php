@@ -29,9 +29,9 @@ class IssuuPanelWidget extends WP_Widget
 		$ipanel_url_page = $instance['issuu_panel_url_page'];
 		$ipanel_order_by = $instance['issuu_panel_order_by'];
 
-		global $api_key, $api_secret;
+		global $issuu_panel_api_key, $issuu_panel_api_secret;
 
-		$issuu_folder = new IssuuFolder($api_key, $api_secret);
+		$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
 		$result = $issuu_folder->issuuList();
 	?>
 		<p>

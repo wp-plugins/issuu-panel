@@ -158,6 +158,7 @@ abstract class IssuuServiceAPI
     {
         if ($is_api_url == true)
         {
+            // echo $this->api_url . '?' . $this->params_str . '<br>';
             return $this->api_url . '?' . $this->params_str;
         }
         else if ($is_api_url == false)

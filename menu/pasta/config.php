@@ -1,29 +1,29 @@
 <?php
 
-add_action(ISSUU_PAINEL_PREFIX . 'submenu_pages', 'issuu_painel_menu_folder', 2);
+add_action(ISSUU_PAINEL_PREFIX . 'submenu_pages', 'issuu_panel_menu_folder', 2);
 
-function issuu_painel_menu_folder()
+function issuu_panel_menu_folder()
 {
 	global $issuu_painel_capacity;
 	
 	add_submenu_page(
-		'issuu-painel-admin',
+		ISSUU_PAINEL_MENU,
 		get_issuu_message('Folders'),
 		get_issuu_message('Folders'),
 		$issuu_painel_capacity,
 		'issuu-folder-admin',
-		'issuu_painel_menu_folder_init'
+		'issuu_panel_menu_folder_init'
 	);
 }
 
-function issuu_painel_menu_folder_init()
+function issuu_panel_menu_folder_init()
 {
-	global $api_key, $api_secret;
+	global $issuu_panel_api_key, $issuu_panel_api_secret;
 
 	echo '<div class="wrap">';
 
-	$issuu_folder = new IssuuFolder($api_key, $api_secret);
-	$issuu_document = new IssuuDocument($api_key, $api_secret);
+	$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
+	$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
 
 	if (isset($_GET['add']))
 	{
@@ -44,7 +44,7 @@ function issuu_painel_menu_folder_init()
 
 		if ($fo['stat'] == 'ok')
 		{
-			$issuu_bookmark = new IssuuBookmark($api_key, $api_secret);
+			$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
 			$bookmarks = $issuu_bookmark->issuuList(array('folderId' => $_GET['folder']));
 
 			$fo = $fo['folder'];
@@ -99,7 +99,7 @@ function issuu_painel_menu_folder_init()
 
 		if (isset($folders['folder']) && !empty($folders['folder']))
 		{
-			$issuu_bookmark = new IssuuBookmark($api_key, $api_secret);
+			$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
 	
 			foreach ($folders['folder'] as $f) {
 				$fId = $f->folderId;

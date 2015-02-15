@@ -5,7 +5,7 @@
 
 			ed.addCommand('IssuuPanelCommand', function(){
 				ed.windowManager.open({
-					file: ajaxurl + '?action=issuu_painel_tinymce_ajax',
+					file: ajaxurl + '?action=issuu_panel_tinymce_ajax',
 					width: 420,
 					height: 235,
 					inline: 1

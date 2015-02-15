@@ -140,11 +140,25 @@ function issuu_panel_refresh_mce($ver)
 
 add_filter('tiny_mce_version', 'issuu_panel_refresh_mce');
 
+function issuu_panel_activation_hook()
+{
+	add_option(ISSUU_PAINEL_PREFIX . 'api_key', '');
+	add_option(ISSUU_PAINEL_PREFIX . 'api_secret', '');
+	add_option(ISSUU_PAINEL_PREFIX . 'enabled_user', 'Administrator');
+}
+
+function issuu_panel_uninstall_hook()
+{
+	delete_option(ISSUU_PAINEL_PREFIX . 'api_key');
+	delete_option(ISSUU_PAINEL_PREFIX . 'api_secret');
+	delete_option(ISSUU_PAINEL_PREFIX . 'enabled_user');
+}
+
 function issuu_panel_tinymce_ajax()
 {
-	global $api_key, $api_secret;
+	global $issuu_panel_api_key, $issuu_panel_api_secret;
 
-	$issuu_folder = new IssuuFolder($api_key, $api_secret);
+	$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
 	$result = $issuu_folder->issuuList();
 	?>
 
@@ -264,3 +278,123 @@ function issuu_panel_tinymce_ajax()
 }
 
 add_action('wp_ajax_issuu_panel_tinymce_ajax', 'issuu_panel_tinymce_ajax');
+
+function issuu_panel_wp_enqueue_scripts()
+{
+	wp_enqueue_style('issuu-painel-documents', ISSUU_PAINEL_URL . 'css/issuu-painel-documents.css');
+	wp_enqueue_script(
+		'issuu-iframe-link',
+		ISSUU_PAINEL_URL . 'js/issuu-iframe-link.min.js',
+		array('jquery'),
+		null,
+		true
+	);
+	wp_enqueue_script(
+		'issuu-replace-tags',
+		ISSUU_PAINEL_URL . 'js/replace-tags-p.min.js',
+		array('jquery'),
+		null,
+		true
+	);
+}
+
+add_action('wp_enqueue_scripts', 'issuu_panel_wp_enqueue_scripts');
+
+function issuu_panel_admin_enqueue_scripts()
+{
+	wp_enqueue_style(
+		'issuu-painel-pagination',
+		ISSUU_PAINEL_URL . 'css/issuu-painel-pagination.css',
+		array(),
+		null,
+		'screen, print'
+	);
+	wp_enqueue_style('document-list', ISSUU_PAINEL_URL . 'css/document-list.css', array(), null, 'screen, print');
+	wp_enqueue_style('folder-list', ISSUU_PAINEL_URL . 'css/folder-list.css', array('dashicons'), null, 'screen, print');
+	wp_enqueue_script('json2');
+	wp_enqueue_script('jquery');
+
+	if (isset($_GET['page']) && $_GET['page'] == 'issuu-document-admin')
+	{
+		if (isset($_GET['upload']))
+		{
+			wp_enqueue_script(
+				'issuu-painel-document-upload-js',
+				ISSUU_PAINEL_URL . 'js/document-upload.min.js',
+				array('jquery'),
+				null,
+				true
+			);
+		}
+		else if (isset($_GET['update']))
+		{
+			wp_enqueue_script(
+				'issuu-painel-document-update-js',
+				ISSUU_PAINEL_URL . 'js/document-update.min.js',
+				array('jquery'),
+				null,
+				true
+			);
+		}
+		else if (isset($_GET['url_upload']))
+		{
+			wp_enqueue_script(
+				'issuu-painel-document-url-upload-js',
+				ISSUU_PAINEL_URL . 'js/document-url-upload.min.js',
+				array('jquery'),
+				null,
+				true
+			);
+		}
+	}
+}
+
+add_action('admin_enqueue_scripts', 'issuu_panel_admin_enqueue_scripts');
+
+function issuu_panel_init_hook()
+{
+	global $issuu_panel_api_key, $issuu_panel_api_secret, $issuu_painel_capabilities, $issuu_painel_capacity;
+
+	if ($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_GET['page']) && $_GET['page'] == ISSUU_PAINEL_MENU))
+	{
+		update_option(ISSUU_PAINEL_PREFIX . 'api_key', trim($_POST['api_key']));
+		update_option(ISSUU_PAINEL_PREFIX . 'api_secret', trim($_POST['api_secret']));
+
+		if (in_array($_POST['enabled_user'], array('Administrator', 'Editor', 'Author')))
+		{
+			update_option(ISSUU_PAINEL_PREFIX . 'enabled_user', $_POST['enabled_user']);
+		}
+		else
+		{
+			$_POST['enabled_user'] = 'Administrator';
+			update_option(ISSUU_PAINEL_PREFIX . 'enabled_user', 'Administrator');
+		}
+
+		$issuu_panel_api_key = trim($_POST['api_key']);
+		$issuu_panel_api_secret = trim($_POST['api_secret']);
+		$issuu_painel_capacity = $issuu_painel_capabilities[$_POST['enabled_user']];
+	}
+	else
+	{
+		$issuu_panel_api_key = get_option(ISSUU_PAINEL_PREFIX . 'api_key');
+		$issuu_panel_api_secret = get_option(ISSUU_PAINEL_PREFIX . 'api_secret');
+		$issuu_panel_enabled_user = get_option(ISSUU_PAINEL_PREFIX . 'enabled_user');
+		$issuu_painel_capacity = $issuu_painel_capabilities[$issuu_panel_enabled_user];
+	}
+}
+
+add_action('init', 'issuu_panel_init_hook');
+
+function ip_menu_admin()
+{
+	global $issuu_panel_api_key, $issuu_panel_api_secret;
+
+	do_action(ISSUU_PAINEL_PREFIX . 'menu_page');
+
+	if ((!is_null($issuu_panel_api_key) && strlen($issuu_panel_api_key) > 0) && (!is_null($issuu_panel_api_secret) && strlen($issuu_panel_api_secret) > 0))
+	{
+		do_action(ISSUU_PAINEL_PREFIX . 'submenu_pages');
+	}
+}
+
+add_action('admin_menu', 'ip_menu_admin');

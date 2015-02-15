@@ -2,7 +2,7 @@
 
 function issuu_panel_the_last_document($atts)
 {
-	global $api_key, $api_secret;
+	global $issuu_panel_api_key, $issuu_panel_api_secret;
 
 	$doc = array();
 
@@ -19,12 +19,12 @@ function issuu_panel_the_last_document($atts)
 
 	if (trim($atts['id']) != '')
 	{
-		$issuu_bookmark = new IssuuBookmark($api_key, $api_secret);
+		$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
 		include(ISSUU_PAINEL_DIR . 'shortcode/the-last-document-folder.php');
 	}
 	else
 	{
-		$issuu_document = new IssuuDocument($api_key, $api_secret);
+		$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
 		$params = array(
 			'resultOrder' => 'desc',
 			'startIndex' => '0',
@@ -47,7 +47,7 @@ function issuu_panel_the_last_document($atts)
 			$content .= '<a href="' . $atts['link'] . '">';
 		}
 
-		$content .= '<img src="' . $doc['thumbnail'] . '">';
+		$content .= '<img id="issuu-panel-last-document" src="' . $doc['thumbnail'] . '">';
 
 		if ($atts['link'] != '')
 		{
@@ -60,6 +60,8 @@ function issuu_panel_the_last_document($atts)
 		$content .= get_issuu_message('No documents');
 		$content .= '</p>';
 	}
+
+	$content .= '<!-- Issuu Panel | Developed by Pedro Marcelo de Sá Alves -->';
 
 	return $content;
 }

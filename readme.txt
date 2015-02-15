@@ -3,19 +3,26 @@ Contributors: pedromjava
 Tags: issuu, shortcode, embed, documents, folders, panel, admin
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 1.1.1
+Stable tag: 1.3.3
 
 Upload documents, create folders, embed documents in the posts by the WordPress admin panel.
 
 == Description ==
 
-Admin panel for Issuu. You can upload your documents, create folders and embed documents in posts.
+<p>Issuu Panel is a WordPress plugin that allow to you upload your documents, create folders and embed documents in posts.</p>
+<h3>Collaborators</h3>
+<h4>Translators</h4>
+<ul>
+	<li>
+		<a href="http://www.sniezek.eu/" target="_blank">Arkadiusz Śnieżek</a> - Polish
+	</li>
+</ul>
 
 == Installation ==
 
-1.Extract the plugin's folder in /wp-content/plugins/.
-2.Active plugin.
-3.Insert your keys in Issuu Panel menu
+1.Extract the plugin's folder in /wp-content/plugins/<br>
+2.Active plugin<br>
+3.Insert your keys in Issuu Panel menu<br>
 
 == License ==
 
@@ -42,6 +49,12 @@ You should have received a copy of the GNU General Public License along with Iss
 You can send the translation by e-mail. Send for pedromarcelodesaalves@gmail.com.
 
 == Changelog ==
+
+= 1.3.3 =
+* Fixed: TinyMCE lightbox was not displayed
+* Fixed: PDF list was not displayed on some websites
+* Added: Activation and uninstall hooks
+* Added: Polish translation by Arkadiusz Śnieżek
 
 = 1.1.1 =
 * Fixed: TinyMCE button did not work in WordPress 4.1

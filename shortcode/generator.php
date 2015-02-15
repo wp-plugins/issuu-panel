@@ -55,7 +55,7 @@ if ($pagination['pageSize'] < $pagination['totalCount'])
 
 	if ($page != 1)
 	{
-		$content .= '<a href="' . issuu_painel_link_page(1, $permalink, $page_query_name) . '" class="issuu-painel-number-text">'
+		$content .= '<a href="' . issuu_panel_link_page(1, $permalink, $page_query_name) . '" class="issuu-painel-number-text">'
 			. get_issuu_message('« First page') . '</a>';
 	}
 	$content .= '<div class="issuu-painel-page-numbers">';
@@ -63,7 +63,7 @@ if ($pagination['pageSize'] < $pagination['totalCount'])
 	for ($i = 1; $i <= $number_pages; $i++) {
 		if ($i != $page)
 		{
-			$content .= '<a href="' . issuu_painel_link_page($i, $permalink, $page_query_name) . '" class="issuu-painel-number-page">'
+			$content .= '<a href="' . issuu_panel_link_page($i, $permalink, $page_query_name) . '" class="issuu-painel-number-page">'
 				. $i . '</a>';
 		}
 		else
@@ -76,8 +76,9 @@ if ($pagination['pageSize'] < $pagination['totalCount'])
 
 	if ($page != $number_pages)
 	{
-		$content .= '<a href="' . issuu_painel_link_page($number_pages, $permalink, $page_query_name) . '" class="issuu-painel-number-text">'
+		$content .= '<a href="' . issuu_panel_link_page($number_pages, $permalink, $page_query_name) . '" class="issuu-painel-number-text">'
 			. get_issuu_message('Last Page »') . '</a>';
 	}
 	$content .= '</div><!-- /.issuu-painel-paginate -->';
+	$content .= '<!-- Issuu Panel | Developed by Pedro Marcelo de Sá Alves -->';
 }
