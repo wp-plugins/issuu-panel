@@ -13,33 +13,33 @@ Upload documents, create folders, embed documents in the posts by the WordPress 
 <h3>Keys</h3>
 <p>
 	In this menu, you have to insert your keys which you generated in your Issuu account.
-	<img src="http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-1.png">
+	![Keys](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-1.png)
 </p>
 <p>
 	After the insert, other	sub menus will be unlocked.
-	<img src="http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-2.png">
+	![Keys](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-2.png)
 </p>
 <h3>Documents</h3>
 <p>
 	In this sub menu, you can upload documents from your directories, upload documents from a URL, edit them and delete them.
-	<img src="http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-3.png">
+	![Documents](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-3.png)
 </p>
 <h3>Folders</h3>
 <p>
 	In this sub menu, you can create folders to add your documents in them, edit them and delete them.
-	<img src="http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-4.png">
+	![Folders](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-4.png)
 </p>
 <h3>TinyMCE button</h3>
 <p>
 	You can insert shortcodes in your posts or pages using the TinyMCE button.
-	<img src="http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-5.png">
-	<img src="http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-6.png">
+	![TinyMCE button](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-5.png)
+	![TinyMCE button](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-6.png)
 </p>
 <h3>Widget</h3>
 <p>
 	With this widget you can display the last document from your account or the last document in a folder.
-	<img src="http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-7.png">
-	<img src="http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-8.png">
+	![Widget](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-7.png)
+	![Widget](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-8.png)
 </p>
 <h3>Collaborators</h3>
 <h4>Translators</h4>
