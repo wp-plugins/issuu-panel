@@ -73,6 +73,7 @@ You should have received a copy of the GNU General Public License along with Iss
 5. This is the button to insert a shortcode in post content.
 6. This is the screen to insert a shortcode in post content.
 7. This widget displays the last document in accordance with the options
+8. This widget displays the last document in accordance with the options
 
 == Frequently Asked Questions ==
 
