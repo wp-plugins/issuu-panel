@@ -19,6 +19,14 @@ class IssuuPanelWidget extends WP_Widget
 		$order_by = ' order_by="' . $instance['issuu_panel_order_by'] . '"';
 
 		echo $args['before_widget'];
+
+		if (!empty($instance['issuu_panel_title']))
+		{
+			echo $args['before_title'];
+			echo $instance['issuu_panel_title'];
+			echo $args['after_title'];
+		}
+
 		echo do_shortcode("[issuu-panel-last-document{$id}{$link}{$order_by}]");
 		echo $args['after_widget'];
 	}
@@ -28,6 +36,7 @@ class IssuuPanelWidget extends WP_Widget
 		$ipanel_folder = $instance['issuu_panel_folder'];
 		$ipanel_url_page = $instance['issuu_panel_url_page'];
 		$ipanel_order_by = $instance['issuu_panel_order_by'];
+		$ipanel_title = $instance['issuu_panel_title'];
 
 		global $issuu_panel_api_key, $issuu_panel_api_secret;
 
@@ -35,8 +44,15 @@ class IssuuPanelWidget extends WP_Widget
 		$result = $issuu_folder->issuuList();
 	?>
 		<p>
+			<label for="<?= $this->get_field_id('issuu_panel_title'); ?>">
+				<strong><?php _e('Title'); ?></strong><br>
+				<input type="text" id="<?= $this->get_field_id('issuu_panel_title'); ?>" class="widefat"
+					name="<?= $this->get_field_name('issuu_panel_title'); ?>" value="<?= $ipanel_title ?>">
+			</label>
+		</p>
+		<p>
 			<label for="<?= $this->get_field_id('issuu_panel_folder'); ?>">
-				<b><?php the_issuu_message('Folder') ?></b>
+				<strong><?php the_issuu_message('Folder') ?></strong><br>
 				<select id="<?= $this->get_field_id('issuu_panel_folder'); ?>"
 					name="<?= $this->get_field_name('issuu_panel_folder'); ?>">
 					<option value="0"><?php the_issuu_message('Select...'); ?></option>
@@ -53,14 +69,14 @@ class IssuuPanelWidget extends WP_Widget
 		</p>
 		<p>
 			<label for="<?= $this->get_field_id('issuu_panel_url_page'); ?>">
-				<b><?php the_issuu_message('URL page') ?></b><br>
-				<input type="text" id="<?= $this->get_field_id('issuu_panel_url_page'); ?>"
+				<strong><?php the_issuu_message('URL page') ?></strong><br>
+				<input type="text" id="<?= $this->get_field_id('issuu_panel_url_page'); ?>" class="widefat"
 					name="<?= $this->get_field_name('issuu_panel_url_page'); ?>" value="<?= $ipanel_url_page ?>">
 			</label>
 		</p>
 		<p>
 			<label for="<?= $this->get_field_id('issuu_panel_order_by'); ?>">
-				<b><?php the_issuu_message('Order by'); ?></b><br>
+				<strong><?php the_issuu_message('Order by'); ?></strong><br>
 				<select name="<?= $this->get_field_name('issuu_panel_order_by'); ?>"
 					id="<?= $this->get_field_id('issuu_panel_order_by'); ?>">
 					<option <?= ($ipanel_order_by == 'title')? 'selected' : ''?> value="title">

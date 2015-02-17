@@ -92,6 +92,10 @@
 	color: #333;
 }
 
+.issuu-painel-paginate > .issuu-painel-page-numbers > span.issuu-painel-number-page.issuu-painel-continue{
+	color: #ee5226;
+}
+
 .issuu-painel-paginate > .issuu-painel-page-numbers > .issuu-painel-number-page:last-child{
 	border-right: none;
 }

@@ -58,19 +58,11 @@ if ($pagination['pageSize'] < $pagination['totalCount'])
 		$content .= '<a href="' . issuu_panel_link_page(1, $permalink, $page_query_name) . '" class="issuu-painel-number-text">'
 			. get_issuu_message('« First page') . '</a>';
 	}
-	$content .= '<div class="issuu-painel-page-numbers">';
 
-	for ($i = 1; $i <= $number_pages; $i++) {
-		if ($i != $page)
-		{
-			$content .= '<a href="' . issuu_panel_link_page($i, $permalink, $page_query_name) . '" class="issuu-painel-number-page">'
-				. $i . '</a>';
-		}
-		else
-		{
-			$content .= '<span class="issuu-painel-number-page">' . $i . '</span>';
-		}
-	}
+	$content .= '<div class="issuu-painel-page-numbers">';
+	
+	$issuu_panel_paginate = new IssuuPanelPaginate($permalink, $page_query_name, $number_pages, $page);
+	$content .= $issuu_panel_paginate->paginate('span', 'issuu-painel-number-page', 'issuu-painel-continue');
 
 	$content .= '</div><!-- /.issuu-painel-page-numbers -->';
 

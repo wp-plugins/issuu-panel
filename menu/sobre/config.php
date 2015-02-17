@@ -1,22 +1,19 @@
 <?php
 
-add_action(ISSUU_PAINEL_PREFIX . 'submenu_pages', 'issuu_panel_menu_about', 3);
-
-function issuu_panel_menu_about()
+class IssuuPageAbout extends IssuuPanelSubmenu
 {
-	global $issuu_painel_capacity;
+	protected $slug = 'issuu-panel-about';
 
-	add_submenu_page(
-		ISSUU_PAINEL_MENU,
-		get_issuu_message('About'),
-		get_issuu_message('About'),
-		$issuu_painel_capacity,
-		'issuu-panel-about',
-		'issuu_panel_menu_about_init'
-	);
+	protected $page_title = 'About';
+
+	protected $menu_title = 'About';
+
+	protected $priority = 3;
+
+	public function page()
+	{
+		include(ISSUU_PAINEL_DIR . 'menu/sobre/page.php');
+	}
 }
 
-function issuu_panel_menu_about_init()
-{
-	include(ISSUU_PAINEL_DIR . 'menu/sobre/page.php');
-}
+new IssuuPageAbout();
