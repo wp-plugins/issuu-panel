@@ -1,6 +1,6 @@
 === Issuu Panel ===
 Contributors: pedromjava
-Tags: issuu, shortcode, embed, documents, folders, panel, admin
+Tags: issuu, shortcode, embed, documents, folders, panel, admin, widget
 Requires at least: 3.5
 Tested up to: 4.1
 Stable tag: 1.4.4.2
