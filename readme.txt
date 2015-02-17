@@ -12,34 +12,34 @@ Upload documents, create folders, embed documents in the posts by the WordPress 
 <p>Issuu Panel is a WordPress plugin that allow to you upload your documents, create folders and embed documents in posts.</p>
 <h3>Keys</h3>
 <p>
-	In this menu, you have to insert your keys which you generated in your Issuu account.
-	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-1.png?raw=true">Click here</a>
+	In this menu, you have to insert your keys which you generated in your Issuu account.<br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-1.png?raw=true">Screenshot 1</a>
 </p>
 <p>
-	After the insert, other	sub menus will be unlocked.
-	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-2.png?raw=true">Click here</a>
+	After the insert, other	sub menus will be unlocked.<br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-2.png?raw=true">Screenshot 2</a>
 </p>
 <h3>Documents</h3>
 <p>
-	In this sub menu, you can upload documents from your directories, upload documents from a URL, edit them and delete them.
-	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-3.png?raw=true">Click here</a>
+	In this sub menu, you can upload documents from your directories, upload documents from a URL, edit them and delete them.<br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-3.png?raw=true">Screenshot 3</a>
 </p>
 <h3>Folders</h3>
 <p>
-	In this sub menu, you can create folders to add your documents in them, edit them and delete them.
-	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-4.png?raw=true">Click here</a>
+	In this sub menu, you can create folders to add your documents in them, edit them and delete them.<br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-4.png?raw=true">Screenshot 4</a>
 </p>
 <h3>TinyMCE button</h3>
 <p>
-	You can insert shortcodes in your posts or pages using the TinyMCE button.
-	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-5.png?raw=true">Click here</a>
-	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-6.png?raw=true">Click here</a>
+	You can insert shortcodes in your posts or pages using the TinyMCE button.<br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-5.png?raw=true">Screenshot 5</a><br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-6.png?raw=true">Screenshot 6</a>
 </p>
 <h3>Widget</h3>
 <p>
-	With this widget you can display the last document from your account or the last document in a folder.
-	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-7.png?raw=true">Click here</a>
-	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-8.png?raw=true">Click here</a>
+	With this widget you can display the last document from your account or the last document in a folder.<br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-7.png?raw=true">Screenshot 7</a><br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-8.png?raw=true">Screenshot 8</a>
 </p>
 <h3>Collaborators</h3>
 <h4>Translators</h4>
