@@ -13,33 +13,33 @@ Upload documents, create folders, embed documents in the posts by the WordPress 
 <h3>Keys</h3>
 <p>
 	In this menu, you have to insert your keys which you generated in your Issuu account.
-	![Keys](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-1.png)
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-1.png?raw=true">Click here</a>
 </p>
 <p>
 	After the insert, other	sub menus will be unlocked.
-	![Keys](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-2.png)
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-2.png?raw=true">Click here</a>
 </p>
 <h3>Documents</h3>
 <p>
 	In this sub menu, you can upload documents from your directories, upload documents from a URL, edit them and delete them.
-	![Documents](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-3.png)
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-3.png?raw=true">Click here</a>
 </p>
 <h3>Folders</h3>
 <p>
 	In this sub menu, you can create folders to add your documents in them, edit them and delete them.
-	![Folders](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-4.png)
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-4.png?raw=true">Click here</a>
 </p>
 <h3>TinyMCE button</h3>
 <p>
 	You can insert shortcodes in your posts or pages using the TinyMCE button.
-	![TinyMCE button](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-5.png)
-	![TinyMCE button](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-6.png)
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-5.png?raw=true">Click here</a>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-6.png?raw=true">Click here</a>
 </p>
 <h3>Widget</h3>
 <p>
 	With this widget you can display the last document from your account or the last document in a folder.
-	![Widget](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-7.png)
-	![Widget](http://plugins.svn.wordpress.org/issuu-panel/assets/screenshot-8.png)
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-7.png?raw=true">Click here</a>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-8.png?raw=true">Click here</a>
 </p>
 <h3>Collaborators</h3>
 <h4>Translators</h4>
