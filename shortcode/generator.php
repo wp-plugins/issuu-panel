@@ -29,8 +29,8 @@ foreach ($docs as $doc) {
 	}
 
 	$content .= '<div class="document-cell">';
-	$content .= '<a href="' . $doc['id'] . '" class="link-issuu-document">';
-	$content .= '<img src="' . $doc['thumbnail'] . '">';
+	$content .= '<a href="' . $doc['id'] . '" class="link-issuu-document" rel="nofollow">';
+	$content .= '<img src="' . $doc['thumbnail'] . '" alt="' . $doc['title'] . '"">';
 	$content .= '</a><br>';
 	$content .= '<span>' . $doc['title'] . '</span>';
 	$content .= '</div>';

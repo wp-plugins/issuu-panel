@@ -34,7 +34,8 @@ function issuu_panel_the_last_document($atts)
 		$docs = $issuu_document->issuuList($params);
 		$docs = $docs['document'];
 		$doc = array(
-			'thumbnail' => 'http://image.issuu.com/' . $docs[0]->documentId . '/jpg/page_1_thumb_large.jpg'
+			'thumbnail' => 'http://image.issuu.com/' . $docs[0]->documentId . '/jpg/page_1_thumb_large.jpg',
+			'title' => $docs[0]->title
 		);
 	}
 
@@ -47,7 +48,7 @@ function issuu_panel_the_last_document($atts)
 			$content .= '<a href="' . $atts['link'] . '">';
 		}
 
-		$content .= '<img id="issuu-panel-last-document" src="' . $doc['thumbnail'] . '">';
+		$content .= '<img id="issuu-panel-last-document" src="' . $doc['thumbnail'] . '" alt="' . $doc['title'] . '"">';
 
 		if ($atts['link'] != '')
 		{
