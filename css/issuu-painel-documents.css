@@ -1,0 +1,112 @@
+@charset "utf-8";
+
+.issuu-iframe{
+	margin-bottom: 20px;
+}
+
+.issuu-painel-list,
+.issuu-painel-list *{
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+			box-sizing: border-box;
+}
+
+.issuu-painel-list{
+	display: block;
+}
+
+.issuu-painel-list > .issuu-document-row{
+	display: block;
+}
+
+@media(min-width: 768px){
+	.issuu-painel-list > .issuu-document-row{
+		width: 100%;
+		float: left;
+	}
+}
+
+.issuu-painel-list > .issuu-document-row > .document-cell{
+	padding: 8px;
+	background-color: #fff;
+	box-shadow: 1px 1px 3px rgba(0,0,0,.6);
+	margin-bottom: 10px;
+}
+
+@media(max-width: 767px){
+	.issuu-painel-list > .issuu-document-row > .document-cell{
+		max-width: 250px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+}
+
+@media(min-width: 768px){
+	.issuu-painel-list > .issuu-document-row > .document-cell{
+		float: left;
+		width: calc(33.33333% - 26px);
+		margin-right: 39px;
+	}
+	
+	.issuu-painel-list > .issuu-document-row > .document-cell:last-child{
+		margin-right: 0px;
+	}
+}
+
+
+.issuu-painel-list > .issuu-document-row > .document-cell > a{
+	width: 100%;
+}
+
+.issuu-painel-list > .issuu-document-row > .document-cell > a > img{
+	width: inherit;
+	height: auto;
+}
+
+.issuu-painel-list:after{
+	content: " ";
+	display: table;
+	clear: both;
+}
+
+.issuu-painel-paginate{
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.issuu-painel-paginate > .issuu-painel-page-numbers{
+	font-size: 12px;
+	display: inline-block;
+}
+
+.issuu-painel-paginate > .issuu-painel-page-numbers > .issuu-painel-number-page{
+	border-right: 1px solid #ee5226;
+	padding: 3px 7px;
+	color: #ee5226;
+	text-decoration: none;
+	display: inline-block;
+	line-height: 12px;
+}
+
+.issuu-painel-paginate > .issuu-painel-page-numbers > span.issuu-painel-number-page{
+	color: #333;
+}
+
+.issuu-painel-paginate > .issuu-painel-page-numbers > span.issuu-painel-number-page.issuu-painel-continue{
+	color: #ee5226;
+}
+
+.issuu-painel-paginate > .issuu-painel-page-numbers > .issuu-painel-number-page:last-child{
+	border-right: none;
+}
+
+.issuu-painel-paginate > .issuu-painel-number-text{
+	color: #ee5226;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.issuu-painel-paginate > .issuu-painel-number-text:hover{
+	color: #ee5226;
+	text-decoration: none;
+}
