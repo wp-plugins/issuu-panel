@@ -2,36 +2,41 @@
 
 require($_GET['abspath'] . '/wp-load.php');
 
-$document = new IssuuDocument(
-	get_option(ISSUU_PAINEL_PREFIX . 'api_key'),
-	get_option(ISSUU_PAINEL_PREFIX . 'api_secret')
-);
+try {
+	$document = new IssuuDocument(
+		get_option(ISSUU_PAINEL_PREFIX . 'api_key'),
+		get_option(ISSUU_PAINEL_PREFIX . 'api_secret')
+	);
 
-$params['orgDocName'] = $_GET['name'];
+	$params['orgDocName'] = $_GET['name'];
 
-$doc = $document->issuuList($params);
+	$doc = $document->issuuList($params);
 
-if ($doc['stat'] == 'ok')
-{
-	$doc = $doc['document'][0];
-
-	if (intval($doc->coverWidth) != 0 && intval($doc->coverHeight) != 0)
+	if ($doc['stat'] == 'ok')
 	{
-		$image = 'http://image.issuu.com/%s/jpg/page_1_thumb_large.jpg';
+		$doc = $doc['document'][0];
 
-		$echo = '<input type="checkbox" name="name[]" class="issuu-checkbox" value="' . $doc->name . '">
-				<div class="document-box">
-					<img src="' . sprintf($image, $doc->documentId) . '">
-					<div class="update-document">
-						<a href="admin.php?page=issuu-document-admin&update=' . $doc->orgDocName . '">Editar</a>
+		if (intval($doc->coverWidth) != 0 && intval($doc->coverHeight) != 0)
+		{
+			$image = 'http://image.issuu.com/%s/jpg/page_1_thumb_large.jpg';
+
+			$echo = '<input type="checkbox" name="name[]" class="issuu-checkbox" value="' . $doc->name . '">
+					<div class="document-box">
+						<img src="' . sprintf($image, $doc->documentId) . '">
+						<div class="update-document">
+							<a href="admin.php?page=issuu-document-admin&update=' . $doc->orgDocName . '">Editar</a>
+						</div>
 					</div>
-				</div>
-				<p class="description">' . $doc->title . '</p>';
+					<p class="description">' . $doc->title . '</p>';
 
-		echo $echo;
+			echo $echo;
+		}
+		else
+		{
+			echo 'stat-fail';
+		}
 	}
-	else
-	{
-		echo 'stat-fail';
-	}
+} catch (Exception $e) {
+	issuu_panel_debug("Ajax Document Exception - " . $e->getMessage());
+	echo 'stat-fail';
 }

@@ -1,24 +1,59 @@
+var issuuPanel = {
+	attributes : {
+	    id: ''
+	},
+	params : {
+	    allowfullscreen: 'true',
+	    menu: 'false',
+	    wmode: 'transparent'
+	},
+	flashvars : {
+	    jsAPIClientDomain: window.location.hostname,
+	    mode: 'mini'
+	}
+};
 (function($){
+	$('[data-issuu-viewer]').each(function(){
+		issuuPanel.flashvars.documentId = $(this).data('document-id');
+		issuuPanel.attributes.id = $(this).data("issuu-viewer");
+		swfobject.embedSWF(
+			"http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf",
+			issuuPanel.attributes.id,
+			"100%",
+			"323",
+			"9.0.0",
+			"http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf",
+			issuuPanel.flashvars,
+			issuuPanel.params,
+			issuuPanel.attributes
+		);
+	});
 	$('.link-issuu-document').click(function(e){
-		var docId = $(this).attr('href');
-		var $issuupainel = $(this).parent().parent().parent().parent();
+		issuuPanel.flashvars.documentId = $(this).attr('href');
+		issuuPanel.attributes.id = $(this).data('target');
 
-		var script = '<div data-doc-id="' + docId + '" style="width: 100%; height: 323px;" class="issuuembed issuu-isrendered">';
-		script += '<div style="width:100%; height:100%;">';
-		script += '<div style="height:-moz-calc(100% - 18px); height:-webkit-calc(100% - 18px); height:-o-calc(100% - 18px); height:calc(100% - 18px);">';
-		script += '<object id="issuu_18089929316192865" style="width:100%;height:100%" type="application/x-shockwave-flash" data="http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf">';
-		script += '<param name="movie" value="http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf">';
-		script += '<param name="flashvars" value="mode=mini&amp;pageNumber=issuu.com&amp;documentId=' + docId + '&amp;embedId=1">';
-		script += '<param name="allowfullscreen" value="true">';
-		script += '<param name="allowscriptaccess" value="always">';
-		script += '<param name="menu" value="false">';
-		script += '<param name="wmode" value="transparent">';
-		script += '</object>';
-		script += '</div>';
-		script += '</div>';
-		script += '</div>';
+		swfobject.embedSWF(
+	    	"http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf",
+	    	issuuPanel.attributes.id,
+	    	"100%",
+	    	"323",
+	    	"9.0.0",
+	    	"http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf",
+	    	issuuPanel.flashvars,
+	    	issuuPanel.params,
+	    	issuuPanel.attributes
+	    );
 
-		$issuupainel.find('.issuu-iframe').html(script);
+		var top = $('#' + issuuPanel.attributes.id).offset().top - 50;
+		$('html, body').animate({scrollTop : top}, 'slow');
 		e.preventDefault();
+	});
+
+	$('.issuu-painel-paginate').each(function(){
+		var paginate_html = $(this).html();
+		var regex = /(\<p\>|\<\/p\>)/;
+
+		paginate_html = paginate_html.replace(regex, '');
+		$(this).html(paginate_html);
 	});
 })(jQuery);

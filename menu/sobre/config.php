@@ -13,6 +13,7 @@ class IssuuPageAbout extends IssuuPanelSubmenu
 	public function page()
 	{
 		include(ISSUU_PAINEL_DIR . 'menu/sobre/page.php');
+		issuu_panel_debug("Issuu Panel page (About)");
 	}
 }
 

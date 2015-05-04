@@ -12,19 +12,20 @@ class IssuuPanelScripts
 	{
 		wp_enqueue_style('issuu-painel-documents', ISSUU_PAINEL_URL . 'css/issuu-painel-documents.min.css');
 		wp_enqueue_script(
-			'issuu-iframe-link',
-			ISSUU_PAINEL_URL . 'js/issuu-iframe-link.min.js',
+			'issuu-panel-swfobject',
+			ISSUU_PAINEL_URL . 'js/swfobject/swfobject.js',
 			array('jquery'),
 			null,
 			true
 		);
 		wp_enqueue_script(
-			'issuu-replace-tags',
-			ISSUU_PAINEL_URL . 'js/replace-tags-p.min.js',
-			array('jquery'),
+			'issuu-iframe-link',
+			ISSUU_PAINEL_URL . 'js/issuu-iframe-link.min.js',
+			array('jquery', 'issuu-panel-swfobject'),
 			null,
 			true
 		);
+		issuu_panel_debug("Hook wp_enqueue_scripts");
 	}
 
 	public function adminScripts()
@@ -74,6 +75,7 @@ class IssuuPanelScripts
 				);
 			}
 		}
+		issuu_panel_debug("Hook admin_enqueue_scripts");
 	}
 }
 

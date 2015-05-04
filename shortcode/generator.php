@@ -1,24 +1,18 @@
 <?php
 
+global $issuuPanelConfig;
+$isMobile = $issuuPanelConfig->getMobileDetect()->isMobile();
+$isBot = $issuuPanelConfig->isBot();
+
 $i = 1;
 $max = count($docs);
 $content = '<div class="issuupainel">';
+
 $content .= '<div class="issuu-iframe">';
-$content .= '<div data-doc-id="' . $docs[0]['id'] . '" style="width: 100%; height: 323px;" class="issuuembed issuu-isrendered">';
-$content .= '<div style="width:100%; height:100%;">';
-$content .= '<div style="height:-moz-calc(100% - 18px); height:-webkit-calc(100% - 18px); height:-o-calc(100% - 18px); height:calc(100% - 18px);">';
-$content .= '<object id="issuu_18089929316192865" style="width:100%;height:100%" type="application/x-shockwave-flash" data="http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf">';
-$content .= '<param name="movie" value="http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf">';
-$content .= '<param name="flashvars" value="mode=mini&amp;pageNumber=issuu.com&amp;documentId=' . $docs[0]['id'] . '&amp;embedId=1">';
-$content .= '<param name="allowfullscreen" value="true">';
-$content .= '<param name="allowscriptaccess" value="always">';
-$content .= '<param name="menu" value="false">';
-$content .= '<param name="wmode" value="transparent">';
-$content .= '</object>';
-$content .= '</div>';
-$content .= '</div>';
-$content .= '</div>';
-$content .= '</div><!-- /#issuu-iframe -->';
+$content .= '<div data-document-id="' . $docs[0]['id'] . '" data-issuu-viewer="issuu-viewer-'
+	. $issuu_shortcode_index . '" id="issuu-viewer-'
+	. $issuu_shortcode_index . '"></div>';
+$content .= '</div><!-- /.issuu-iframe -->';
 
 $content .= '<div class="issuu-painel-list">';
 
@@ -29,7 +23,21 @@ foreach ($docs as $doc) {
 	}
 
 	$content .= '<div class="document-cell">';
-	$content .= '<a href="' . $doc['id'] . '" class="link-issuu-document" rel="nofollow">';
+
+	if ($isBot == true)
+	{
+		$content .= '<a href="' . $doc['url'] . '" data-target="issuu-viewer-' . $issuu_shortcode_index . '">';
+	}
+	else if ($isMobile == true)
+	{
+		$content .= '<a href="' . $doc['url'] . '" data-target="issuu-viewer-' . $issuu_shortcode_index . '" target="_blank">';
+	}
+	else
+	{
+		$content .= '<a href="' . $doc['id'] . '" class="link-issuu-document" data-target="issuu-viewer-'
+			. $issuu_shortcode_index . '" rel="nofollow">';
+	}
+
 	$content .= '<img src="' . $doc['thumbnail'] . '" alt="' . $doc['title'] . '"">';
 	$content .= '</a><br>';
 	$content .= '<span>' . $doc['title'] . '</span>';

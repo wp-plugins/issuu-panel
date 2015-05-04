@@ -150,15 +150,14 @@ abstract class IssuuServiceAPI
     *
     *   Monta a URL da requisição
     *
-    *   @access protected
+    *   @access public
     *   @param boolean $is_api_url
     *   @return string Retorna a URL da api ou upload junto com os parâmetros passados
     */
-    protected function buildUrl($is_api_url = true)
+    public function buildUrl($is_api_url = true)
     {
         if ($is_api_url == true)
         {
-            // echo $this->api_url . '?' . $this->params_str . '<br>';
             return $this->api_url . '?' . $this->params_str;
         }
         else if ($is_api_url == false)

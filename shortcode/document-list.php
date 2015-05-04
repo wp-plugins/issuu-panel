@@ -6,6 +6,7 @@ function issuu_painel_embed_documents_shortcode($atts)
 
 	$issuu_shortcode_index++;
 	$page_query_name = 'ip_shortcode' . $issuu_shortcode_index . '_page';
+	issuu_panel_debug("Shortcode [issuu-painel-document-list]: Index " . $issuu_shortcode_index);
 
 	$atts = shortcode_atts(
 		array(
@@ -26,10 +27,17 @@ function issuu_painel_embed_documents_shortcode($atts)
 		'documentSortBy' => $atts['order_by']
 	);
 
-	$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
-	$documents = $issuu_document->issuuList($params);
+	try {
+		$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
+		$documents = $issuu_document->issuuList($params);
+		issuu_panel_debug("Shortcode [issuu-painel-document-list]: URL - " . $issuu_document->buildUrl());
+	} catch (Exception $e) {
+		issuu_panel_debug("Shortcode [issuu-painel-document-list]: IssuuDocument->issuuList Exception - " .
+			$e->getMessage());
+		return "";
+	}
 
-	if ($documents['stat'] == 'ok')
+	if (isset($documents['stat']) && $documents['stat'] == 'ok')
 	{
 		if (isset($documents['document']) && !empty($documents['document']))
 		{
@@ -51,15 +59,18 @@ function issuu_painel_embed_documents_shortcode($atts)
 			
 			include(ISSUU_PAINEL_DIR . 'shortcode/generator.php');
 
+			issuu_panel_debug("Shortcode [issuu-painel-document-list]: List of documents successfully displayed");
 			return $content;
 		}
 		else
 		{
+			issuu_panel_debug("Shortcode [issuu-painel-document-list]: No documents in list");
 			return '<h3>' . get_issuu_message('No documents in list') . '</h3>';
 		}
 	}
 	else
 	{
+		issuu_panel_debug("Shortcode [issuu-painel-document-list]: " . $documents['message']);
 		return '<h3>' . get_issuu_message($documents['message']) . '</h3>';
 	}
 

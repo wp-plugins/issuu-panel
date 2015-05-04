@@ -13,17 +13,28 @@ class IssuuPanelFolders extends IssuuPanelSubmenu
 	public function page()
 	{
 		global $issuu_panel_api_key, $issuu_panel_api_secret;
+		issuu_panel_debug("Issuu Panel Page (Folders)");
 
 		echo '<div class="wrap">';
 
-		$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
-		$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
+		try {
+			$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
+			$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
+		} catch (Exception $e) {
+			issuu_panel_debug("Page Exception - " . $e->getMessage());
+			return "";
+		}
 
 		if (isset($_GET['add']))
 		{
 			if ($_SERVER['REQUEST_METHOD'] == 'POST'  && !isset($_POST['delete']))
 			{
-				include(ISSUU_PAINEL_DIR . 'menu/pasta/requests/add.php');
+				try {
+					require(ISSUU_PAINEL_DIR . 'menu/pasta/requests/add.php');
+				} catch (Exception $e) {
+					issuu_panel_debug("Folder Add Exception - " . $e->getMessage());
+					return "";
+				}
 			}
 			else
 			{
@@ -34,12 +45,22 @@ class IssuuPanelFolders extends IssuuPanelSubmenu
 		}
 		else if (isset($_GET['folder']) && strlen($_GET['folder']) > 1)
 		{
-			$fo = $issuu_folder->update(array('folderId' => $_GET['folder']));
+			try {
+				$fo = $issuu_folder->update(array('folderId' => $_GET['folder']));
+			} catch (Exception $e) {
+				issuu_panel_debug("Page Exception - " . $e->getMessage());
+				return "";
+			}
 
 			if ($fo['stat'] == 'ok')
 			{
-				$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
-				$bookmarks = $issuu_bookmark->issuuList(array('folderId' => $_GET['folder']));
+				try {
+					$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
+					$bookmarks = $issuu_bookmark->issuuList(array('folderId' => $_GET['folder']));
+				} catch (Exception $e) {
+					issuu_panel_debug("Page Exception - " . $e->getMessage());
+					return "";
+				}
 
 				$fo = $fo['folder'];
 				$image = 'http://image.issuu.com/%s/jpg/page_1_thumb_large.jpg';
@@ -71,7 +92,12 @@ class IssuuPanelFolders extends IssuuPanelSubmenu
 		{
 			if ($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_POST['delete']) && $_POST['delete'] == 'true'))
 			{
-				include(ISSUU_PAINEL_DIR . 'menu/pasta/requests/delete.php');
+				try {
+					require(ISSUU_PAINEL_DIR . 'menu/pasta/requests/delete.php');
+				} catch (Exception $e) {
+					issuu_panel_debug("Page Exception - " . $e->getMessage());
+					return "";
+				}
 			}
 
 			$image = 'http://image.issuu.com/%s/jpg/page_1_thumb_large.jpg';
@@ -84,7 +110,12 @@ class IssuuPanelFolders extends IssuuPanelSubmenu
 			);
 			$folders_documents = array();
 
-			$folders = $issuu_folder->issuuList($params);
+			try {
+				$folders = $issuu_folder->issuuList($params);
+			} catch (Exception $e) {
+				issuu_panel_debug("Page Exception - " . $e->getMessage());
+				return "";
+			}
 
 			if (isset($folders['totalCount']) && $folders['totalCount'] > $folders['pageSize'])
 			{
@@ -93,25 +124,30 @@ class IssuuPanelFolders extends IssuuPanelSubmenu
 
 			if (isset($folders['folder']) && !empty($folders['folder']))
 			{
-				$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
-		
-				foreach ($folders['folder'] as $f) {
-					$fId = $f->folderId;
-					$folders_documents[$fId] = array(
-						'name' => $f->name,
-						'items' => $f->items
-					);
+				try {
+					$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
+			
+					foreach ($folders['folder'] as $f) {
+						$fId = $f->folderId;
+						$folders_documents[$fId] = array(
+							'name' => $f->name,
+							'items' => $f->items
+						);
 
-					$bookmarks = $issuu_bookmark->issuuList(array('pageSize' => 3, 'folderId' => $fId));
+						$bookmarks = $issuu_bookmark->issuuList(array('pageSize' => 3, 'folderId' => $fId));
 
-					if ($bookmarks['stat'] == 'ok' && (isset($bookmarks['bookmark']) && !empty($bookmarks['bookmark'])))
-					{
-						$folders_documents[$fId]['documentsId'] = $bookmarks['bookmark'];
+						if ($bookmarks['stat'] == 'ok' && (isset($bookmarks['bookmark']) && !empty($bookmarks['bookmark'])))
+						{
+							$folders_documents[$fId]['documentsId'] = $bookmarks['bookmark'];
+						}
+						else
+						{
+							$folders_documents[$fId]['documentsId'] = array();
+						}
 					}
-					else
-					{
-						$folders_documents[$fId]['documentsId'] = array();
-					}
+				} catch (Exception $e) {
+					issuu_panel_debug("Page Exception - " . $e->getMessage());
+					return "";
 				}
 			}
 

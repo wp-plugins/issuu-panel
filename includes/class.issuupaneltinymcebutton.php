@@ -7,6 +7,7 @@ class IssuuPanelTinyMCEButton
 		add_action('init', array($this, 'init'));
 		add_filter('tiny_mce_version', array($this, 'issuuPanelRefreshMCE'));
 		add_action('wp_ajax_issuu_panel_tinymce_ajax', array($this, 'tinymceButtonPage'));
+		issuu_panel_debug("TinyMCE Button");
 	}
 
 	public function init()
@@ -43,8 +44,15 @@ class IssuuPanelTinyMCEButton
 	{
 		global $issuu_panel_api_key, $issuu_panel_api_secret;
 
-		$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
-		$result = $issuu_folder->issuuList();
+		try {
+			$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
+			$result = $issuu_folder->issuuList();
+			issuu_panel_debug("TinyMCE Modal URL folder - " . $issuu_folder->buildUrl());
+		} catch (Exception $e) {
+			issuu_panel_debug("TinyMCE Modal Exception - " . $e->getMessage());
+			die();
+		}
+		
 		?>
 
 		<!DOCTYPE html>

@@ -19,6 +19,7 @@ class IssuuPanelMenu implements IssuuPanelPage
 			array($this, 'page'),
 			ISSUU_PAINEL_URL . 'images/icon2.png'
 		);
+		issuu_panel_debug("Issuu Panel Page (Main)");
 	}
 
 	public function page()
@@ -28,6 +29,7 @@ class IssuuPanelMenu implements IssuuPanelPage
 		echo '<div class="wrap">';
 
 		$link_api_service = '<a target="_blank" href="https://issuu.com/home/settings/apikey">click here</a>';
+		$issuu_panel_debug = (get_option(ISSUU_PAINEL_PREFIX . 'debug') == 'active')? 'checked' : '';
 
 		if (strlen($issuu_panel_api_key) <= 0)
 		{
@@ -67,6 +69,9 @@ class IssuuPanelMenu implements IssuuPanelPage
 
 		echo '</select> ';
 		the_issuu_message('can use this plugin');
+		echo '</p>';
+		echo "<p><label for=\"issuu_panel_debug\"><strong>Debug</strong> ";
+		echo "<input type=\"checkbox\" name=\"issuu_panel_debug\" id=\"issuu_panel_debug\" value=\"active\" $issuu_panel_debug/>";
 		echo '</p>';
 		echo "<p><input type=\"submit\" class=\"button-primary\" value=\"" . get_issuu_message('Save') . "\"></p>";
 		echo "</form>";

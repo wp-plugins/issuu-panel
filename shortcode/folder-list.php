@@ -6,6 +6,7 @@ function issuu_painel_embed_folder_shortcode($atts)
 
 	$issuu_shortcode_index++;
 	$page_query_name = 'ip_shortcode' . $issuu_shortcode_index . '_page';
+	issuu_panel_debug("Shortcode [issuu-painel-folder-list]: Index " . $issuu_shortcode_index);
 
 	$atts = shortcode_atts(
 		array(
@@ -22,7 +23,13 @@ function issuu_painel_embed_folder_shortcode($atts)
 
 	if (is_string($atts['id']) && strlen(trim($atts['id'])) > 0)
 	{
-		$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
+		try {
+			$issuu_bookmark = new IssuuBookmark($issuu_panel_api_key, $issuu_panel_api_secret);
+		} catch (Exception $e) {
+			issuu_panel_debug("Shortcode [issuu-painel-folder-list]: IssuuBookmark object Exception - " .
+				$e->getMessage());
+			return "";
+		}
 
 		if (trim($atts['order_by']) == 'publishDate')
 		{
@@ -32,14 +39,27 @@ function issuu_painel_embed_folder_shortcode($atts)
 				'startIndex' => ($atts['per_page'] * ($page - 1))
 			);
 
-			$bookmarks = $issuu_bookmark->issuuList($params);
+			try {
+				$bookmarks = $issuu_bookmark->issuuList($params);
+				issuu_panel_debug("Shortcode [issuu-painel-folder-list]: URL - " . $issuu_bookmark->buildUrl());
+			} catch (Exception $e) {
+				issuu_panel_debug("Shortcode [issuu-painel-folder-list]: IssuuBookmark->issuuList Exception - " .
+					$e->getMessage());
+				return "";
+			}
 
-			if ($bookmarks['stat'] == 'ok')
+			if (isset($bookmarks['stat']) && $bookmarks['stat'] == 'ok')
 			{
 				if (isset($bookmarks['bookmark']) && !empty($bookmarks['bookmark']))
 				{
 					$docs = array();
-					$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
+					try {
+						$issuu_document = new IssuuDocument($issuu_panel_api_key, $issuu_panel_api_secret);
+					} catch (Exception $e) {
+						issuu_panel_debug("Shortcode [issuu-painel-folder-list]: IssuuDocument object Exception - " .
+							$e->getMessage());
+						return "";
+					}
 
 					$pagination = array(
 						'pageSize' => $bookmarks['pageSize'],
@@ -47,7 +67,15 @@ function issuu_painel_embed_folder_shortcode($atts)
 					);
 
 					foreach ($bookmarks['bookmark'] as $book) {
-						$document = $issuu_document->update(array('name' => $book->name));
+						try {
+							$document = $issuu_document->update(array('name' => $book->name));
+							issuu_panel_debug("Shortcode [issuu-painel-folder-list]: URL - " .
+								$issuu_document->buildUrl());
+						} catch (Exception $e) {
+							issuu_panel_debug("Shortcode [issuu-painel-folder-list]: IssuuDocument->update Exception - " .
+								$e->getMessage());
+							return "";
+						}
 
 						$docs[] = array(
 							'id' => $book->documentId,
@@ -62,15 +90,18 @@ function issuu_painel_embed_folder_shortcode($atts)
 
 					include(ISSUU_PAINEL_DIR . 'shortcode/generator.php');
 
+					issuu_panel_debug("Shortcode [issuu-painel-folder-list]: List of documents successfully displayed");
 					return $content;
 				}
 				else
 				{
-					return '<h3>No documents in list</h3>';
+					issuu_panel_debug("Shortcode [issuu-painel-folder-list]: No documents in list");
+					return '<h3>' . get_issuu_message('No documents in list') . '</h3>';
 				}
 			}
 			else
 			{
+				issuu_panel_debug("Shortcode [issuu-painel-folder-list]: " . $bookmarks['message']);
 				return '<h3>' . $bookmarks['message'] . '</h3>';
 			}
 		}
@@ -84,9 +115,16 @@ function issuu_painel_embed_folder_shortcode($atts)
 				'bookmarkSortBy' => $atts['order_by']
 			);
 
-			$bookmarks = $issuu_bookmark->issuuList($params);
+			try {
+				$bookmarks = $issuu_bookmark->issuuList($params);
+				issuu_panel_debug("Shortcode [issuu-painel-folder-list]: URL - " . $issuu_bookmark->buildUrl());
+			} catch (Exception $e) {
+				issuu_panel_debug("Shortcode [issuu-painel-folder-list]: IssuuBookmark->issuuList Exception - " .
+					$e->getMessage());
+				return "";
+			}
 
-			if ($bookmarks['stat'] == 'ok')
+			if (isset($bookmarks['stat']) && $bookmarks['stat'] == 'ok')
 			{
 				if (isset($bookmarks['bookmark']) && !empty($bookmarks['bookmark']))
 				{
@@ -103,15 +141,18 @@ function issuu_painel_embed_folder_shortcode($atts)
 
 					include(ISSUU_PAINEL_DIR . 'shortcode/generator.php');
 
+					issuu_panel_debug("Shortcode [issuu-painel-folder-list]: List of documents successfully displayed");
 					return $content;
 				}
 				else
 				{
+					issuu_panel_debug("Shortcode [issuu-painel-folder-list]: No documents in list");
 					return '<h3>' . get_issuu_message('No documents in list') . '</h3>';
 				}
 			}
 			else
 			{
+				issuu_panel_debug("Shortcode [issuu-painel-folder-list]: " . $bookmarks['message']);
 				return '<h3>' . get_issuu_message($bookmarks['message'])
 					. ((trim($bookmarks['field']) != '')? ': ' . $bookmarks['field'] : '') . '</h3>';
 			}
@@ -119,6 +160,7 @@ function issuu_painel_embed_folder_shortcode($atts)
 	}
 	else
 	{
+		issuu_panel_debug("Shortcode [issuu-painel-folder-list]: Insert folder ID");
 		return '<h3>' . get_issuu_message('Insert folder ID') . '</h3>';
 	}
 }
