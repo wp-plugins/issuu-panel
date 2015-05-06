@@ -2,20 +2,25 @@
 
 class IssuuPanelConfig
 {
-	private $issuuPanelDebug;
+	private static $issuuPanelDebug;
 
-	private $mobileDetect;
+	private static $mobileDetect;
 
-	public function __construct()
+	public static function init()
 	{
 		// IssuuPanelDebug
-		$this->issuuPanelDebug = new IssuuPanelDebug(get_option(ISSUU_PAINEL_PREFIX . 'debug'));
-		$this->issuuPanelDebug->appendMessage("-----------------------", false);
-		$this->issuuPanelDebug->appendMessage("Browser: " . $_SERVER['HTTP_USER_AGENT']);
+		self::$issuuPanelDebug = new IssuuPanelDebug(get_option(ISSUU_PAINEL_PREFIX . 'debug'));
+		self::$issuuPanelDebug->appendMessage("-----------------------", false);
+		self::$issuuPanelDebug->appendMessage("Browser: " . $_SERVER['HTTP_USER_AGENT']);
 
 		// Mobile_Detect
-		$this->mobileDetect = new Mobile_Detect();
+		self::$mobileDetect = new Mobile_Detect();
 	}
+
+    public static function getInstance()
+    {
+        return new static();
+    }
 
 	public function setVariable($name, $value)
 	{
@@ -24,10 +29,10 @@ class IssuuPanelConfig
 
     public function isBot()
     {
-        $utilities = $this->mobileDetect->getUtilities();
+        $utilities = self::$mobileDetect->getUtilities();
         $bots = spliti("\|", $utilities['Bot']);
         $mobileBots = spliti("\|", $utilities['MobileBot']);
-        $userAgent = $this->mobileDetect->getHttpHeader('USER_AGENT');
+        $userAgent = self::$mobileDetect->getHttpHeader('USER_AGENT');
 
         foreach ($bots as $bot) {
             if (strpos($userAgent, $bot) !== false)
@@ -50,9 +55,9 @@ class IssuuPanelConfig
      *
      * @return mixed
      */
-    public function getIssuuPanelDebug()
+    public static function getIssuuPanelDebug()
     {
-        return $this->issuuPanelDebug;
+        return self::$issuuPanelDebug;
     }
 
     /**
@@ -60,16 +65,15 @@ class IssuuPanelConfig
      *
      * @return mixed
      */
-    public function getMobileDetect()
+    public static function getMobileDetect()
     {
-        return $this->mobileDetect;
+        return self::$mobileDetect;
     }
 }
 
-$issuuPanelConfig = new IssuuPanelConfig();
+IssuuPanelConfig::init();
 
 function issuu_panel_debug($message)
 {
-	global $issuuPanelConfig;
-	$issuuPanelConfig->getIssuuPanelDebug()->appendMessage($message);
+	IssuuPanelConfig::getIssuuPanelDebug()->appendMessage($message);
 }

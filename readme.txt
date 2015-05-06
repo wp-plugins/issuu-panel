@@ -1,9 +1,9 @@
-=== Issuu Panel ===
+﻿=== Issuu Panel ===
 Contributors: pedromjava
 Tags: issuu, shortcode, embed, documents, folders, panel, admin, widget
 Requires at least: 3.5
 Tested up to: 4.2.1
-Stable tag: 1.4.6
+Stable tag: 1.4.6.1
 
 Upload documents, create folders, embed documents in the posts by the WordPress admin panel.
 
@@ -82,6 +82,9 @@ You should have received a copy of the GNU General Public License along with Iss
 You can send the translation by e-mail. Send for pedromarcelodesaalves@gmail.com.
 
 == Changelog ==
+
+= 1.4.6.1 =
+* Updated: Adding static methods in IssuuPanelConfig class
 
 = 1.4.6 =
 * Added: Debug mode for log file

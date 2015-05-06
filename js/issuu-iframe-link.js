@@ -1,7 +1,4 @@
 var issuuPanel = {
-	attributes : {
-	    id: ''
-	},
 	params : {
 	    allowfullscreen: 'true',
 	    menu: 'false',
@@ -15,38 +12,38 @@ var issuuPanel = {
 (function($){
 	$('[data-issuu-viewer]').each(function(){
 		issuuPanel.flashvars.documentId = $(this).data('document-id');
-		issuuPanel.attributes.id = $(this).data("issuu-viewer");
+		var id = $(this).data("issuu-viewer");
 		swfobject.embedSWF(
 			"http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf",
-			issuuPanel.attributes.id,
+			id,
 			"100%",
 			"323",
 			"9.0.0",
 			"http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf",
 			issuuPanel.flashvars,
 			issuuPanel.params,
-			issuuPanel.attributes
+			{id : id}
 		);
 	});
 	$('.link-issuu-document').click(function(e){
+		e.preventDefault();
 		issuuPanel.flashvars.documentId = $(this).attr('href');
-		issuuPanel.attributes.id = $(this).data('target');
+		var id = $(this).data('target');
 
 		swfobject.embedSWF(
 	    	"http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf",
-	    	issuuPanel.attributes.id,
+	    	id,
 	    	"100%",
 	    	"323",
 	    	"9.0.0",
 	    	"http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf",
 	    	issuuPanel.flashvars,
 	    	issuuPanel.params,
-	    	issuuPanel.attributes
+	    	{id : id}
 	    );
 
-		var top = $('#' + issuuPanel.attributes.id).offset().top - 50;
+		var top = $('#' + id).offset().top - 50;
 		$('html, body').animate({scrollTop : top}, 'slow');
-		e.preventDefault();
 	});
 
 	$('.issuu-painel-paginate').each(function(){

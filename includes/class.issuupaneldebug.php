@@ -26,13 +26,21 @@ class IssuuPanelDebug
 	*/
 	private $debugFile;
 
-	public function __construct($status = 'active')
+	/**
+	*
+	*	@var string $message
+	*/
+	private $message;
+
+	public function __construct($status = 'disable')
 	{
 		$this->status = $status;
 		$this->dir = dirname(__FILE__);
 		$this->logDir = $this->dir . '/../log/';
 		$this->debugFile = $this->logDir . 'issuu-panel-debug.txt';
+		$this->message = '';
 
+		if (!$this->status) $this->status = 'disable';
 
 		if (!is_dir($this->logDir))
 		{
@@ -45,6 +53,11 @@ class IssuuPanelDebug
 		}
 	}
 
+	public function __destruct()
+	{
+		file_put_contents($this->debugFile, $this->message, FILE_APPEND);
+	}
+
 	public function appendMessage($message, $insertDate = true)
 	{
 		if ($this->status == 'active')
@@ -54,7 +67,7 @@ class IssuuPanelDebug
 				$message = date_i18n('[Y-m-d H:i:s] - ') . $message;
 			}
 
-			file_put_contents($this->debugFile, $message . "\n", FILE_APPEND);
+			$this->message .= $message . "\n";
 		}
 	}
 
@@ -86,5 +99,15 @@ class IssuuPanelDebug
     public function getDebugFile()
     {
         return $this->debugFile;
+    }
+
+    /**
+     * Gets the value of message.
+     *
+     * @return string $message
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 }

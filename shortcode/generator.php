@@ -1,6 +1,6 @@
 <?php
 
-global $issuuPanelConfig;
+$issuuPanelConfig = IssuuPanelConfig::getInstance();
 $isMobile = $issuuPanelConfig->getMobileDetect()->isMobile();
 $isBot = $issuuPanelConfig->isBot();
 
