@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-02-02 04:48-0300\n"
+"PO-Revision-Date: 2015-06-13 20:47-0300\n"
 "Last-Translator: Pedro Marcelo <pedromarcelodesaalves@gmail.com>\n"
 "Language-Team: Pedro Marcelo <pedromarcelodesaalves@gmail.com>\n"
 "X-Generator: Poedit 1.6.9\n"
@@ -323,3 +323,18 @@ msgstr "URL da página"
 
 msgid "No documents"
 msgstr "Sem documentos"
+
+msgid "Debug"
+msgstr "Debug"
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "Reader"
+msgstr "Leitor"
+
+msgid "Flush cache"
+msgstr "Esvaziar cache"
+
+msgid "Issuu Panel Simple Reader is compatible with mobile devices"
+msgstr "Issuu Panel Simple Reader é compatível com dispositivos móveis"

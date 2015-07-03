@@ -9,12 +9,10 @@ class IssuuPanelMenu implements IssuuPanelPage
 
 	public function init()
 	{
-		global $issuu_painel_capacity;
-
 		add_menu_page(
 			'Issuu Panel',
 			'Issuu Panel',
-			$issuu_painel_capacity,
+			IssuuPanelConfig::getVariable('issuu_panel_capacity'),
 			ISSUU_PAINEL_MENU,
 			array($this, 'page'),
 			ISSUU_PAINEL_URL . 'images/icon2.png'
@@ -24,59 +22,18 @@ class IssuuPanelMenu implements IssuuPanelPage
 
 	public function page()
 	{
-		global $issuu_panel_api_key, $issuu_panel_api_secret, $issuu_painel_capabilities, $issuu_painel_capacity;
-
-		echo '<div class="wrap">';
+		$issuu_panel_api_key = IssuuPanelConfig::getVariable('issuu_panel_api_key');
+		$issuu_panel_api_secret = IssuuPanelConfig::getVariable('issuu_panel_api_secret');
+		$issuu_panel_capacity = IssuuPanelConfig::getVariable('issuu_panel_capacity');
+		$issuu_panel_reader = IssuuPanelConfig::getVariable('issuu_panel_reader');
+		$issuu_embed = ($issuu_panel_reader == 'issuu_embed')? 'checked' : '';
+		$issuu_panel_simple_reader = ($issuu_panel_reader == 'issuu_panel_simple_reader')? 'checked' : '';
 
 		$link_api_service = '<a target="_blank" href="https://issuu.com/home/settings/apikey">click here</a>';
 		$issuu_panel_debug = (get_option(ISSUU_PAINEL_PREFIX . 'debug') == 'active')? 'checked' : '';
+		$issuu_panel_cache_status = (get_option(ISSUU_PAINEL_PREFIX . 'cache_status') == 'active')? 'checked' : '';
 
-		if (strlen($issuu_panel_api_key) <= 0)
-		{
-			echo "<div class=\"error\"><p>" . get_issuu_message('Insert API key. ') . 
-				get_issuu_message("To create keys $link_api_service") . "</p></div>";
-		}
-
-		if (strlen($issuu_panel_api_secret) <= 0)
-		{
-			echo "<div class=\"error\"><p>" . get_issuu_message('Insert API secret. ') .
-				get_issuu_message("To create keys $link_api_service") . "</p></div>";
-		}
-
-		echo '<h1>Issuu Panel Admin</h1>';
-
-		echo "<form action=\"\" method=\"post\" accept-charset=\"utf-8\">";
-		echo '<p><label for="api_key"><strong>' . get_issuu_message('API key') . '</strong></label><br>';
-		echo "<input type=\"text\" name=\"api_key\" id=\"api_key\" placeholder=\"" .
-			get_issuu_message('Insert API key') . "\" value=\"$issuu_panel_api_key\" style=\"width: 300px;\"><p>";
-		echo '<p><label for="api_secret"><strong>' . get_issuu_message('API secret') . '</strong></label><br>';
-		echo "<input type=\"text\" name=\"api_secret\" id=\"api_secret\" placeholder=\"" .
-			get_issuu_message('Insert API secret') . "\" value=\"$issuu_panel_api_secret\" style=\"width: 300px;\"><p>";
-		echo '<p>';
-		the_issuu_message('Users with capacities from');
-		echo ' <select name="enabled_user">';
-
-		foreach ($issuu_painel_capabilities as $key => $value) {
-			if ($value == $issuu_painel_capacity)
-			{
-				echo "<option value=\"$key\" selected>" . get_issuu_message($key) . "</option>";
-			}
-			else
-			{
-				echo "<option value=\"$key\">" . get_issuu_message($key) . "</option>";
-			}
-		}
-
-		echo '</select> ';
-		the_issuu_message('can use this plugin');
-		echo '</p>';
-		echo "<p><label for=\"issuu_panel_debug\"><strong>Debug</strong> ";
-		echo "<input type=\"checkbox\" name=\"issuu_panel_debug\" id=\"issuu_panel_debug\" value=\"active\" $issuu_panel_debug/>";
-		echo '</p>';
-		echo "<p><input type=\"submit\" class=\"button-primary\" value=\"" . get_issuu_message('Save') . "\"></p>";
-		echo "</form>";
-
-		echo '</div>';
+		require(ISSUU_PAINEL_DIR . 'menu/principal/page.phtml');
 	}
 }
 

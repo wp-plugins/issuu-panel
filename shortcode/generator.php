@@ -1,6 +1,5 @@
 <?php
 
-$issuuPanelConfig = IssuuPanelConfig::getInstance();
 $isMobile = $issuuPanelConfig->getMobileDetect()->isMobile();
 $isBot = $issuuPanelConfig->isBot();
 
@@ -8,11 +7,14 @@ $i = 1;
 $max = count($docs);
 $content = '<div class="issuupainel">';
 
-$content .= '<div class="issuu-iframe">';
-$content .= '<div data-document-id="' . $docs[0]['id'] . '" data-issuu-viewer="issuu-viewer-'
-	. $issuu_shortcode_index . '" id="issuu-viewer-'
-	. $issuu_shortcode_index . '"></div>';
-$content .= '</div><!-- /.issuu-iframe -->';
+if ($issuu_panel_reader == 'issuu_embed')
+{
+	$content .= '<div class="issuu-iframe">';
+	$content .= '<div data-document-id="' . $docs[0]['id'] . '" data-issuu-viewer="issuu-viewer-'
+		. $issuu_shortcode_index . '" id="issuu-viewer-'
+		. $issuu_shortcode_index . '"></div>';
+	$content .= '</div><!-- /.issuu-iframe -->';
+}
 
 $content .= '<div class="issuu-painel-list">';
 
@@ -28,17 +30,19 @@ foreach ($docs as $doc) {
 	{
 		$content .= '<a href="' . $doc['url'] . '" data-target="issuu-viewer-' . $issuu_shortcode_index . '">';
 	}
-	else if ($isMobile == true)
+	else if ($isMobile == true && $issuu_panel_reader != 'issuu_panel_simple_reader')
 	{
 		$content .= '<a href="' . $doc['url'] . '" data-target="issuu-viewer-' . $issuu_shortcode_index . '" target="_blank">';
 	}
 	else
 	{
+		$toggle = ($issuu_panel_reader == 'issuu_panel_simple_reader')? 'issuu-panel-reader' : 'issuu-embed';
 		$content .= '<a href="' . $doc['id'] . '" class="link-issuu-document" data-target="issuu-viewer-'
-			. $issuu_shortcode_index . '" rel="nofollow">';
+			. $issuu_shortcode_index . '" rel="nofollow" data-toggle="' . $toggle . '" data-count-pages="'
+			. $doc['pageCount'] . '">';
 	}
 
-	$content .= '<img src="' . $doc['thumbnail'] . '" alt="' . $doc['title'] . '"">';
+	$content .= '<img src="' . $doc['thumbnail'] . '" alt="' . $doc['title'] . '">';
 	$content .= '</a><br>';
 	$content .= '<span>' . $doc['title'] . '</span>';
 	$content .= '</div>';

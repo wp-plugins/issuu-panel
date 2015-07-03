@@ -2,8 +2,8 @@
 Contributors: pedromjava
 Tags: issuu, shortcode, embed, documents, folders, panel, admin, widget
 Requires at least: 3.5
-Tested up to: 4.2.1
-Stable tag: 1.4.6.1
+Tested up to: 4.2.2
+Stable tag: 1.6
 
 Upload documents, create folders, embed documents in the posts by the WordPress admin panel.
 
@@ -41,11 +41,31 @@ Upload documents, create folders, embed documents in the posts by the WordPress 
 	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-7.png?raw=true">Screenshot 7</a><br>
 	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-8.png?raw=true">Screenshot 8</a>
 </p>
+<h3>Readers</h3>
+<p>
+	There are 2 options: Issuu embed and Issuu Panel Simple Reader.<br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-9.png?raw=true">Screenshot 9</a><br>
+	<a href="https://github.com/pedromarcelojava/Issuu-Painel/blob/master/screenshot-10.png?raw=true">Screenshot 10</a>
+</p>
+<h3>Issuu Panel Simple Reader - Hotkeys</h3>
+<p>
+	<ul>
+		<li>Next page - Ctrl(left) + Arrow right</li>
+		<li>Previous page - Ctrl(left) + Arrow left</li>
+		<li>Zoom more - Ctrl(left) + Arrow up</li>
+		<li>Zoom minus - Ctrl(left) + Arrow down</li>
+		<li>Zoom max - Ctrl(left) + Shift(left) + Arrow up</li>
+		<li>Zoom minimun - Ctrl(left) + Shift(left) + Arrow down</li>
+	</ul>
+</p>
 <h3>Collaborators</h3>
 <h4>Translators</h4>
 <ul>
 	<li>
 		<a href="http://www.sniezek.eu/" target="_blank">Arkadiusz Śnieżek</a> - Polish
+	</li>
+	<li>
+		Fredrik Pettersson - Swedish
 	</li>
 </ul>
 
@@ -74,6 +94,8 @@ You should have received a copy of the GNU General Public License along with Iss
 6. This is the screen to insert a shortcode in post content.
 7. This widget displays the last document in accordance with the options
 8. This widget displays the last document in accordance with the options
+9. You can use the Issuu embed or Issuu Panel Simple Reader for showing your documents
+10. Issuu Panel Simple Reader is compatible with mobile devices
 
 == Frequently Asked Questions ==
 
@@ -82,6 +104,14 @@ You should have received a copy of the GNU General Public License along with Iss
 You can send the translation by e-mail. Send for pedromarcelodesaalves@gmail.com.
 
 == Changelog ==
+
+= 1.6 =
+* Added: Swedish translate by Fredrik Pettersson
+* Created: Issuu Panel Simple Reader - HTML5
+* Created: IssuuPanelCron for scheduled actions
+* Created: Shortcode cache
+* Updated: The log file directory was changed - /wp-content/uploads/issuu-panel-folder/
+* Updated: The document URL on Issuu is default value in My Last Document
 
 = 1.4.6.1 =
 * Updated: Adding static methods in IssuuPanelConfig class

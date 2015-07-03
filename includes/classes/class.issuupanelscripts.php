@@ -10,20 +10,46 @@ class IssuuPanelScripts
 
 	public function wpScripts()
 	{
+		$jsDependences = array('jquery');
 		wp_enqueue_style('issuu-painel-documents', ISSUU_PAINEL_URL . 'css/issuu-painel-documents.min.css');
+
+		switch (IssuuPanelConfig::getVariable('issuu_panel_reader')) {
+			case 'issuu_embed':
+				wp_enqueue_script(
+					'issuu-panel-swfobject',
+					ISSUU_PAINEL_URL . 'js/swfobject/swfobject.js',
+					array('jquery'),
+					null,
+					true
+				);
+				$jsDependences[] = 'issuu-panel-swfobject';
+				break;
+			case 'issuu_panel_simple_reader':
+				wp_enqueue_script(
+					'issuu-panel-simple-reader',
+					ISSUU_PAINEL_URL . 'includes/reader/js/jquery.issuupanelreader.min.js',
+					array('jquery'),
+					null,
+					true
+				);
+				$jsDependences[] = 'issuu-panel-simple-reader';
+				break;
+		}
+		
 		wp_enqueue_script(
-			'issuu-panel-swfobject',
-			ISSUU_PAINEL_URL . 'js/swfobject/swfobject.js',
-			array('jquery'),
+			'issuu-panel-reader',
+			ISSUU_PAINEL_URL . 'js/issuu-panel-reader.min.js',
+			$jsDependences,
 			null,
 			true
 		);
-		wp_enqueue_script(
-			'issuu-iframe-link',
-			ISSUU_PAINEL_URL . 'js/issuu-iframe-link.min.js',
-			array('jquery', 'issuu-panel-swfobject'),
-			null,
-			true
+
+		wp_localize_script(
+			'issuu-panel-reader',
+			'issuuPanelReaderObject',
+			array(
+				'adminAjax' => admin_url('admin-ajax.php')
+			)
 		);
 		issuu_panel_debug("Hook wp_enqueue_scripts");
 	}

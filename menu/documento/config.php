@@ -12,7 +12,8 @@ class IssuuPageDocuments extends IssuuPanelSubmenu
 
 	public function page()
 	{
-		global $issuu_panel_api_key, $issuu_panel_api_secret;
+		$issuu_panel_api_key = IssuuPanelConfig::getVariable('issuu_panel_api_key');
+		$issuu_panel_api_secret = IssuuPanelConfig::getVariable('issuu_panel_api_secret');
 		issuu_panel_debug("Issuu Panel Page (Documents)");
 
 		echo '<div class="wrap">';

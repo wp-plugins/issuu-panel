@@ -42,7 +42,8 @@ class IssuuPanelTinyMCEButton
 
 	public function tinymceButtonPage()
 	{
-		global $issuu_panel_api_key, $issuu_panel_api_secret;
+		$issuu_panel_api_key = IssuuPanelConfig::getVariable('issuu_panel_api_key');
+		$issuu_panel_api_secret = IssuuPanelConfig::getVariable('issuu_panel_api_secret');
 
 		try {
 			$issuu_folder = new IssuuFolder($issuu_panel_api_key, $issuu_panel_api_secret);
@@ -50,7 +51,7 @@ class IssuuPanelTinyMCEButton
 			issuu_panel_debug("TinyMCE Modal URL folder - " . $issuu_folder->buildUrl());
 		} catch (Exception $e) {
 			issuu_panel_debug("TinyMCE Modal Exception - " . $e->getMessage());
-			die();
+			die($e->getMessage());
 		}
 		
 		?>

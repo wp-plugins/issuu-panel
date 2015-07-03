@@ -34,9 +34,12 @@ class IssuuPanelDebug
 
 	public function __construct($status = 'disable')
 	{
+		if (!is_dir(WP_CONTENT_DIR . '/uploads')) mkdir(WP_CONTENT_DIR . '/uploads');
+
 		$this->status = $status;
-		$this->dir = dirname(__FILE__);
-		$this->logDir = $this->dir . '/../log/';
+		$upload = wp_upload_dir();
+		$this->dir = $upload['basedir'];
+		$this->logDir = $this->dir . '/issuu-panel-folder/';
 		$this->debugFile = $this->logDir . 'issuu-panel-debug.txt';
 		$this->message = '';
 

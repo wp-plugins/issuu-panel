@@ -1,8 +1,6 @@
 (function(){
 	tinymce.create('tinymce.plugins.IssuuPanel', {
 		init : function(ed, url) {
-			var popupIssuu = url + '/tinymce/ola-mundo.php';
-
 			ed.addCommand('IssuuPanelCommand', function(){
 				ed.windowManager.open({
 					file: ajaxurl + '?action=issuu_panel_tinymce_ajax',

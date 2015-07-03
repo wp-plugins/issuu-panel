@@ -185,7 +185,7 @@ class IssuuDocument extends IssuuServiceAPI
         $doc->commentsAllowed = $this->validFieldXML($document, 'commentsAllowed', 2);
         $doc->showDetectedLinks = $this->validFieldXML($document, 'showDetectedLinks', 2);
 
-        $doc->pageCount = $this->validFieldXML($document, 'pageCount');
+        $doc->pageCount = $this->validFieldXML($document, 'pageCount', 1);
         $doc->dcla = $this->validFieldXML($document, 'dcla');
         $doc->ep = $this->validFieldXML($document, 'ep');
         $doc->publicationCreationTime = $this->validFieldXML($document, 'publicationCreationTime');
@@ -251,7 +251,7 @@ class IssuuDocument extends IssuuServiceAPI
         $doc->commentsAllowed = $this->validFieldJson($document, 'commentsAllowed', 2);
         $doc->showDetectedLinks = $this->validFieldJson($document, 'showDetectedLinks', 2);
 
-        $doc->pageCount = $this->validFieldJson($document, 'pageCount');
+        $doc->pageCount = $this->validFieldJson($document, 'pageCount', 1);
         $doc->dcla = $this->validFieldJson($document, 'dcla');
         $doc->ep = $this->validFieldJson($document, 'ep');
         $doc->publicationCreationTime = $this->validFieldJson($document, 'publicationCreationTime');

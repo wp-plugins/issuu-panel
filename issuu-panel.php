@@ -3,7 +3,7 @@
 Plugin Name: Issuu Panel
 Plugin URI: https://github.com/pedromarcelojava/Issuu-Painel
 Description: Admin panel for Issuu. You can upload your documents, create folders and embed documents in posts.
-Version: 1.4.6.1
+Version: 1.6
 Author: Pedro Marcelo
 Author URI: https://www.linkedin.com/profile/view?id=265534858
 License: GPL3
@@ -25,38 +25,23 @@ define('ISSUU_PAINEL_PLUGIN_FILE_LANG', dirname(plugin_basename(__FILE__)) . '/l
 
 /*
 |--------------------------------------
-|  VARIABLES
-|--------------------------------------
-*/
-
-
-$issuu_panel_api_key = '';
-$issuu_panel_api_secret = '';
-$issuu_panel_enabled_user = '';
-$issuu_painel_capacity = '';
-$issuu_shortcode_index = 0;
-$issuu_painel_capabilities = array(
-	'Administrator' => 'manage_options',
-	'Editor' => 'edit_private_pages',
-	'Author' => 'upload_files'
-);
-
-/*
-|--------------------------------------
 |  INCLUDES
 |--------------------------------------
 */
 
-require(ISSUU_PAINEL_DIR . 'includes/class.issuupaneldebug.php');
+require(ISSUU_PAINEL_DIR . 'includes/reader/class.issuupanelsimplereader.php');
+require(ISSUU_PAINEL_DIR . 'includes/classes/class.issuupanelcatcher.php');
+require(ISSUU_PAINEL_DIR . 'includes/classes/class.issuupaneldebug.php');
+require(ISSUU_PAINEL_DIR . 'includes/classes/class.issuupanelcron.php');
 require(ISSUU_PAINEL_DIR . 'includes/mobile-detect/Mobile_Detect.php');
-require(ISSUU_PAINEL_DIR . 'includes/class.issuupanelconfig.php');
+require(ISSUU_PAINEL_DIR . 'includes/classes/class.issuupanelconfig.php');
 require(ISSUU_PAINEL_DIR . 'issuuservice/issuu-lib.php');
-require(ISSUU_PAINEL_DIR . 'includes/interface.issuupanelpage.php');
-require(ISSUU_PAINEL_DIR . 'includes/class.issuupanelinitplugin.php');
-require(ISSUU_PAINEL_DIR . 'includes/class.issuupanelscripts.php');
-require(ISSUU_PAINEL_DIR . 'includes/class.issuupaneltinymcebutton.php');
-require(ISSUU_PAINEL_DIR . 'includes/class.issuupanelpaginate.php');
-require(ISSUU_PAINEL_DIR . 'includes/class.issuupanelsubmenu.php');
+require(ISSUU_PAINEL_DIR . 'includes/interfaces/interface.issuupanelpage.php');
+require(ISSUU_PAINEL_DIR . 'includes/classes/class.issuupanelinitplugin.php');
+require(ISSUU_PAINEL_DIR . 'includes/classes/class.issuupanelscripts.php');
+require(ISSUU_PAINEL_DIR . 'includes/classes/class.issuupaneltinymcebutton.php');
+require(ISSUU_PAINEL_DIR . 'includes/classes/class.issuupanelpaginate.php');
+require(ISSUU_PAINEL_DIR . 'includes/classes/class.issuupanelsubmenu.php');
 require(ISSUU_PAINEL_DIR . 'includes/functions.php');
 
 /*

@@ -105,59 +105,16 @@ function issuu_panel_link_page($page, $permalink, $page_name)
 	return preg_replace('/\&{2,}/', '&', $link);
 }
 
-function issuu_panel_init_hook()
-{
-	global $issuu_panel_api_key, $issuu_panel_api_secret, $issuu_painel_capabilities, $issuu_painel_capacity;
-
-	if ($_SERVER['REQUEST_METHOD'] == 'POST' && (isset($_GET['page']) && $_GET['page'] == ISSUU_PAINEL_MENU))
-	{
-		update_option(ISSUU_PAINEL_PREFIX . 'api_key', trim($_POST['api_key']));
-		update_option(ISSUU_PAINEL_PREFIX . 'api_secret', trim($_POST['api_secret']));
-
-		if (in_array($_POST['enabled_user'], array('Administrator', 'Editor', 'Author')))
-		{
-			update_option(ISSUU_PAINEL_PREFIX . 'enabled_user', $_POST['enabled_user']);
-		}
-		else
-		{
-			$_POST['enabled_user'] = 'Administrator';
-			update_option(ISSUU_PAINEL_PREFIX . 'enabled_user', 'Administrator');
-		}
-
-		if (isset($_POST['issuu_panel_debug']) && $_POST['issuu_panel_debug'] == 'active')
-		{
-			update_option(ISSUU_PAINEL_PREFIX . 'debug', 'active');
-		}
-		else
-		{
-			update_option(ISSUU_PAINEL_PREFIX . 'debug', 'disable');
-		}
-
-		$issuu_panel_api_key = trim($_POST['api_key']);
-		$issuu_panel_api_secret = trim($_POST['api_secret']);
-		$issuu_painel_capacity = $issuu_painel_capabilities[$_POST['enabled_user']];
-		issuu_panel_debug("Issuu Panel options updated in init hook");
-	}
-	else
-	{
-		$issuu_panel_api_key = get_option(ISSUU_PAINEL_PREFIX . 'api_key');
-		$issuu_panel_api_secret = get_option(ISSUU_PAINEL_PREFIX . 'api_secret');
-		$issuu_panel_enabled_user = get_option(ISSUU_PAINEL_PREFIX . 'enabled_user');
-		$issuu_painel_capacity = $issuu_painel_capabilities[$issuu_panel_enabled_user];
-		issuu_panel_debug("Issuu Panel options initialized in init hook");
-	}
-}
-
-add_action('init', 'issuu_panel_init_hook');
-
 function ip_menu_admin()
 {
-	global $issuu_panel_api_key, $issuu_panel_api_secret;
+	$issuu_panel_api_key = IssuuPanelConfig::getVariable('issuu_panel_api_key');
+	$issuu_panel_api_secret = IssuuPanelConfig::getVariable('issuu_panel_api_secret');
 
 	do_action(ISSUU_PAINEL_PREFIX . 'menu_page');
 	issuu_panel_debug("Issuu Panel menu loaded");
 
-	if ((!is_null($issuu_panel_api_key) && strlen($issuu_panel_api_key) > 0) && (!is_null($issuu_panel_api_secret) && strlen($issuu_panel_api_secret) > 0))
+	if ((!is_null($issuu_panel_api_key) && strlen($issuu_panel_api_key) > 0) &&
+		(!is_null($issuu_panel_api_secret) && strlen($issuu_panel_api_secret) > 0))
 	{
 		do_action(ISSUU_PAINEL_PREFIX . 'submenu_pages');
 		issuu_panel_debug("Issuu Panel submenus loaded");

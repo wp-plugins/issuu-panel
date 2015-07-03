@@ -2,8 +2,16 @@
 
 function issuu_panel_the_last_document($atts)
 {
-	global $issuu_panel_api_key, $issuu_panel_api_secret;
+	$post = get_post();
+	$postID = (!is_null($post) && IssuuPanelConfig::inContent())? $post->ID : 0;
+	$issuuPanelConfig = IssuuPanelConfig::getInstance();
+	$issuu_panel_api_key = IssuuPanelConfig::getVariable('issuu_panel_api_key');
+	$issuu_panel_api_secret = IssuuPanelConfig::getVariable('issuu_panel_api_secret');
+	$issuu_shortcode_index = IssuuPanelConfig::getNextIteratorByTemplate();
+	$inHook = IssuuPanelConfig::getIssuuPanelCatcher()->getCurrentHookIs();
 	issuu_panel_debug("Shortcode [issuu-panel-last-document]: Init");
+	issuu_panel_debug("Shortcode [issuu-panel-last-document]: Index " . $issuu_shortcode_index . ' in hook ' . $inHook);
+	$shortcode = 'issuu-panel-last-document' . $issuu_shortcode_index . $inHook . $postID;
 
 	$doc = array();
 
@@ -17,6 +25,17 @@ function issuu_panel_the_last_document($atts)
 		),
 		$atts
 	);
+
+	if (IssuuPanelConfig::cacheIsActive() && !$issuuPanelConfig->isBot())
+	{
+		$cache = IssuuPanelConfig::getCache($shortcode, $atts, 1);
+		issuu_panel_debug("Shortcode [issuu-panel-last-document]: Cache active");
+		if (!empty($cache))
+		{
+			issuu_panel_debug("Shortcode [issuu-panel-last-document]: Cache used");
+			return $cache;
+		}
+	}
 
 	if (trim($atts['id']) != '')
 	{
@@ -44,7 +63,8 @@ function issuu_panel_the_last_document($atts)
 			{
 				$doc = array(
 					'thumbnail' => 'http://image.issuu.com/' . $docs[0]->documentId . '/jpg/page_1_thumb_large.jpg',
-					'title' => $docs[0]->title
+					'title' => $docs[0]->title,
+					'url' => 'http://issuu.com/' . $docs[0]->username . '/docs/' . $docs[0]->name
 				);
 			}
 			else
@@ -64,6 +84,10 @@ function issuu_panel_the_last_document($atts)
 		{
 			$content .= '<a href="' . $atts['link'] . '">';
 		}
+		else
+		{
+			$content .= '<a href="' . $doc['url'] . '" target="_blank">';
+		}
 
 		$content .= '<img id="issuu-panel-last-document" src="' . $doc['thumbnail'] . '" alt="' . $doc['title'] . '"">';
 
@@ -82,6 +106,12 @@ function issuu_panel_the_last_document($atts)
 	}
 
 	$content .= '<!-- Issuu Panel | Developed by Pedro Marcelo de Sá Alves -->';
+
+	if (IssuuPanelConfig::cacheIsActive() && !$issuuPanelConfig->isBot())
+	{
+		IssuuPanelConfig::updateCache($shortcode, $content, $atts, 1);
+		issuu_panel_debug("Shortcode [issuu-panel-last-document]: Cache updated");
+	}
 
 	return $content;
 }
